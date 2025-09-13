@@ -5,26 +5,26 @@
 
   <op:config name="%WIRE_BusMasterCount%" value="1" />
   
-  <op:config href="Sensormodul.conf.xml" />
+  <op:config href="RaumController.conf.xml" />
   
   <!-- <op:nowarn id="1" regex="%WIRE_" /> -->
 
   <op:ETS OpenKnxId="0xA0"
     ApplicationNumber="0x12"
-    ApplicationVersion="%SENS_ApplicationVersion%"
-    ReplacesVersions="%SENS_ReplacesVersions%"
+    ApplicationVersion="%ROOM_ApplicationVersion%"
+    ReplacesVersions="%ROOM_ReplacesVersions%"
     ApplicationRevision="0"
     ProductName="Raumcontroller"
-    ApplicationName="Sensor-Wire-PM-Shutter-Button-StateEngine-Logic-Meter-BI-Net"
-    OrderNumber="OpenKnxSensorBig"
+    OrderNumber="OpenKnxRoomControl"
     SerialNumber="0xA012"
     MediumTypes="MT-0 MT-5"
   />
 
   <op:define prefix="BUTTONLINK"
-             share="Sensormodul-VirtualButton.link.xml"
+             share="RaumController-VirtualButton.link.xml"
              noConfigTransfer="true"
              ModuleType="22" >
+    <op:verify File="../library.json" ModuleVersion="%ROOM_ApplicationVersion%" />
   </op:define>
 
   <op:define prefix="BASE"

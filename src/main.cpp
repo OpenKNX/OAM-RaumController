@@ -42,7 +42,7 @@
 
 void setup()
 {
-    const uint8_t firmwareRevision = 2;
+    const uint8_t firmwareRevision = 1;
 
 #ifdef ARDUINO_ARCH_RP2040
     #ifdef ONEWIRE_5V_ENABLE
@@ -59,25 +59,37 @@ void setup()
     openknx.addModule(1, openknxLogic);
 #ifdef WIREMODULE
     openknx.addModule(2, openknxWireGateway);
+#else
+    openknx.unsupportedEtsModule(ETS_ModuleId_WIRE);
 #endif
     openknx.addModule(6, openknxSensorDevicesModule);
     openknx.addModule(4, openknxSensorModule);
 #ifdef PRESENCEMODULE
     openknx.addModule(3, openknxPresenceModule);
+#else
+    openknx.unsupportedEtsModule(ETS_ModuleId_PM);
 #endif
 #ifdef ARDUINO_ARCH_RP2040
     openknx.addModule(5, openknxFileTransferModule);
 #endif
 #ifdef BTN_ChannelCount
     openknx.addModule(7, openknxVirtualButtonModule);
+#else
+    openknx.unsupportedEtsModule(ETS_ModuleId_BTN);
 #endif
 #ifdef OPENKNX_BI_GPIO_PINS
     #ifdef BI_ChannelCount
     openknx.addModule(8, openknxGpioBinaryInputModule);
+    #else
+    openknx.unsupportedEtsModule(ETS_ModuleId_BI);
     #endif
+#else
+    openknx.unsupportedEtsModule(ETS_ModuleId_BI);
 #endif
 #ifdef OPENKNX_ADC_ADS_GAIN
     openknx.addModule(9, openknxADCInputModule);
+#else
+    openknx.unsupportedEtsModule(ETS_ModuleId_ADC);
 #endif
     openknx.addModule(10, openknxMeterModule);
     openknx.addModule(11, openknxDfaModule);
@@ -85,6 +97,8 @@ void setup()
     openknx.addModule(13, openknxFunctionBlocksModule);
 #if defined(KNX_IP_LAN) || defined(KNX_IP_WIFI)
     openknx.addModule(14, openknxNetwork);
+#else
+    openknx.unsupportedEtsModule(ETS_ModuleId_NET);
 #endif
     openknx.setup();
 }

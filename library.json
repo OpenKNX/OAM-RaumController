@@ -1,7 +1,7 @@
 {
-    "name": "OAM-SensorModule",
-    "version": "4.8.0",
-    "description": "SensorModule module for the knx stack, can be parametrized with ETS",
+    "name": "OAM-RaumController",
+    "version": "4.11.1",
+    "description": "RoomController module for the knx stack, can be parametrized with ETS",
     "homepage": "https://openknx.de",
     "authors": {
         "name": "OpenKNX",
@@ -11,7 +11,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/OpenKNX/OAM-SensorModule"
+        "url": "https://github.com/OpenKNX/OAM-RaumController"
     }
     
 }

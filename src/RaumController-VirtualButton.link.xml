@@ -9,7 +9,6 @@
             <ParameterTypes>
               <ParameterType Id="%AID%_PT-BTNInputs" Name="BTNInputs">
                 <TypeRestriction Base="Value" SizeInBit="16">
-                  <Enumeration Text="Externes KO" Value="0" DisplayOrder="100" Id="%ENID%" />
                   <Enumeration Text="Binäreingang A" DisplayOrder="200" Value="45" Id="%ENID%" />
                   <Enumeration Text="Binäreingang B" DisplayOrder="200" Value="46" Id="%ENID%" />
                   <Enumeration Text="Binäreingang C" DisplayOrder="200" Value="47" Id="%ENID%" />

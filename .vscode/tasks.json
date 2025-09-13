@@ -51,7 +51,7 @@
                 "create",
                 "--Debug",
                 "--HeaderFileName=include/knxprod.h",
-                "src/Sensormodul"
+                "src/RaumController"
             ],
             "problemMatcher": [],
             "group": "test"
@@ -75,7 +75,7 @@
             "group": "test"
         },
         {
-            "label": "Build-Beta",
+            "label": "Build-Dev",
             "type": "shell",
             "command": "scripts/Build-Release.ps1",
             "args": [],
