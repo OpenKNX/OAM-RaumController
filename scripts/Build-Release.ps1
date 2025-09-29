@@ -37,31 +37,31 @@ if (Test-Path -Path scripts/data -PathType Container) {
 if ($releaseIndication -eq "Beta") {
     # build BETA firmware 
 
-    # build firmware for RP2040 RoomControl breakout board
-    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_Sensormodul_Breakout_RP2040 firmware-RaumController-Breakout-RP2040 rp2040-tp RaumController-Breakout-Board-Just-for-testers
-    if (!$?) { exit 1 }
+    # # build firmware for RP2040 RoomControl breakout board
+    # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_Sensormodul_Breakout_RP2040 firmware-RaumController-Breakout-RP2040 rp2040-tp RaumController-OpenKNX-Breakout-Board-Just-for-testers
+    # if (!$?) { exit 1 }
 
     # build firmware productive RP2040 RoomControl
     lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_SMARTMF_SENSORMODUL firmware-SmartMF-Sensormodul-RP2040 rp2040-tp
     if (!$?) { exit 1 }
 
-    # Dominiks HF-PM
-    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_UP1_PM_HF firmware-UP1-PM-HF rp2040-tp
-    if (!$?) { exit 1 }
+    # # Dominiks HF-PM
+    # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_UP1_PM_HF firmware-OpenKNX-UP1-PM-HF rp2040-tp
+    # if (!$?) { exit 1 }
 
-    # build firmware for OpenKNX-REG1-Base-V1
-    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_REG1_BASE firmware-REG1-BASE rp2040-tp
-    if (!$?) { exit 1 }
+    # # build firmware for OpenKNX-REG1-Base-V1
+    # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_REG1_BASE firmware-OpenKNX-REG1-BASE rp2040-tp
+    # if (!$?) { exit 1 }
     
-    # build firmware for 1TE-RP2040-SmartMF
-    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_SMARTMF_1TE_REG firmware-SmartMF_1TE_REG rp2040-tp
-    if (!$?) { exit 1 }
+    # # build firmware for 1TE-RP2040-SmartMF
+    # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_SMARTMF_1TE_REG firmware-SmartMF_1TE_REG rp2040-tp
+    # if (!$?) { exit 1 }
 
-    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_PresenceMultiSensor_ABSmartHouse firmware-AB-SmartHouse-PresenceMultiSensor rp2040-tp
-    if (!$?) { exit 1 }
+    # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_PresenceMultiSensor_ABSmartHouse firmware-AB-SmartHouse-PresenceMultiSensor rp2040-tp
+    # if (!$?) { exit 1 }
 
-    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_PIPICO_BCU_CONNECTOR firmware-PiPico-BCU-Connector rp2040-tp
-    if (!$?) { exit 1 }
+    # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_PIPICO_BCU_CONNECTOR firmware-OpenKNX-PiPico-BCU-Connector rp2040-tp
+    # if (!$?) { exit 1 }
 
 }
 
@@ -72,24 +72,24 @@ if ($releaseIndication -eq "Release") {
     # if (!$?) { exit 1 }
 
     # build firmware productive RP2040 sensormodule
-    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_UP1_PM_HF firmware-UP1-PM-HF rp2040-tp
+    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_UP1_PM_HF firmware-OpenKNX-UP1-PM-HF rp2040-tp
     if (!$?) { exit 1 }
 
     # RP2040
     # build firmware for OpenKNX-REG1-Base-V0
-    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_REG1_BASE_V0 firmware-REG1-BASE-V0 rp2040-tp
+    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_REG1_BASE_V0 firmware-OpenKNX-REG1-BASE-V0 rp2040-tp
     if (!$?) { exit 1 }
 
     # build firmware for OpenKNX-REG1-Base-V1
-    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_REG1_BASE firmware-REG1-BASE rp2040-tp
+    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_REG1_BASE firmware-OpenKNX-REG1-BASE rp2040-tp
     if (!$?) { exit 1 }
 
     # build firmware for PiPico-BCU-Connector
-    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_PIPICO_BCU_CONNECTOR firmware-PiPico-BCU-Connector rp2040-tp
+    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_PIPICO_BCU_CONNECTOR firmware-OpenKNX-PiPico-BCU-Connector rp2040-tp
     if (!$?) { exit 1 }
 
     # build firmware for SEN_UP1_8XTH
-    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_SEN_UP1_8XTH firmware-UP1-SEN-8x rp2040-tp
+    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_SEN_UP1_8XTH firmware-OpenKNX-UP1-SEN-8x rp2040-tp
     if (!$?) { exit 1 }
 
     # build firmware for 1TE-RP2040-SmartMF

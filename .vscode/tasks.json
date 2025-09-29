@@ -4,11 +4,11 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Develop RP2040 Big",
+            "label": "Develop RP2040",
             "type": "shell",
             "command": "scripts/OpenKNX-Build.ps1",
             "args": [
-                "develop_RP2040_Big"
+                "develop_RP2040"
             ],
             "group": "build",
             "problemMatcher": []

@@ -50,6 +50,7 @@ Der Konfigurationstransfer erlaubt einen
 * Export von Konfigurationen von OpenKNX-Modulen und deren Kanälen
 * Import von Konfigurationen von OpenKNX-Modulen und deren Kanälen
 * Kopieren der Konfiguration von einem OpenKNX-Modulkanal auf einen anderen
+* Kanaltausch der Konfiguration zwischen 2 Modulkanälen
 * Zurücksetzen der Konfiguration eines OpenKNX-Modulkanals auf Standardwerte
 
 Die Funktionen vom Konfigurationstransfer-Modul sind unter [Applikationsbeschreibung-ConfigTransfer](https://github.com/OpenKNX/OFM-ConfigTransfer/blob/v1/doc/Applikationsbeschreibung-ConfigTransfer.md) beschrieben.
