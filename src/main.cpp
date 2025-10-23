@@ -9,18 +9,22 @@
     #include "Presence.h"
 #endif
 #include "SensorDevices.h"
-#include "SensorModule.h"
+#ifdef SENSORMODULE
+    #include "SensorModule.h"
+#endif
 #include "DfaModule.h"
 #include "ShutterControllerModule.h"
 #include "FunctionBlocksModule.h"
+#include "FileTransferModule.h"
 
 #ifdef ARDUINO_ARCH_RP2040
-    #include "FileTransferModule.h"
     #include "UsbExchangeModule.h"
-    #if defined(KNX_IP_LAN) || defined(KNX_IP_WIFI)
-        #include "NetworkModule.h"
-    #endif
 #endif
+
+#if defined(KNX_IP_LAN) || defined(KNX_IP_WIFI)
+    #include "NetworkModule.h"
+#endif
+
 #ifdef ARDUINO_ARCH_RP2040
     #pragma message "Pico Core Version: " ARDUINO_PICO_VERSION_STR
 #endif
@@ -42,8 +46,6 @@
 
 void setup()
 {
-    const uint8_t firmwareRevision = 2;
-
 #ifdef ARDUINO_ARCH_RP2040
     #ifdef ONEWIRE_5V_ENABLE
     pinMode(ONEWIRE_5V_ENABLE, OUTPUT);
@@ -55,33 +57,34 @@ void setup()
     pinMode(26, INPUT_PULLUP);
 #endif
 
-    openknx.init(firmwareRevision);
+    openknx.init();
     openknx.addModule(1, openknxLogic);
 #ifdef WIREMODULE
     openknx.addModule(2, openknxWireGateway);
 #else
     openknx.unsupportedEtsModule(ETS_ModuleId_WIRE);
 #endif
+
+#if defined(SENSORMODULE) || defined(PMMODULE)
     openknx.addModule(6, openknxSensorDevicesModule);
+#endif
+#ifdef SENSORMODULE
     openknx.addModule(4, openknxSensorModule);
+#else
+    openknx.unsupportedEtsModule(ETS_ModuleId_SENS);
+#endif
 #ifdef PRESENCEMODULE
     openknx.addModule(3, openknxPresenceModule);
 #else
     openknx.unsupportedEtsModule(ETS_ModuleId_PM);
 #endif
-#ifdef ARDUINO_ARCH_RP2040
-    openknx.addModule(5, openknxFileTransferModule);
-#endif
+openknx.addModule(5, openknxFileTransferModule);
 #ifdef BTN_ChannelCount
     openknx.addModule(7, openknxVirtualButtonModule);
-#else
-    openknx.unsupportedEtsModule(ETS_ModuleId_BTN);
 #endif
 #ifdef OPENKNX_BI_GPIO_PINS
     #ifdef BI_ChannelCount
     openknx.addModule(8, openknxGpioBinaryInputModule);
-    #else
-    openknx.unsupportedEtsModule(ETS_ModuleId_BI);
     #endif
 #else
     openknx.unsupportedEtsModule(ETS_ModuleId_BI);
@@ -100,10 +103,14 @@ void setup()
 #else
     openknx.unsupportedEtsModule(ETS_ModuleId_NET);
 #endif
+#ifdef ARDUINO_ARCH_RP2040
+    openknx.addModule(15, openknxUsbExchangeModule);
+#endif
     openknx.setup();
 }
 
 void loop()
 {
+    // test
     openknx.loop();
 }

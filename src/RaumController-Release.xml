@@ -7,24 +7,22 @@
   
   <op:config href="RaumController.conf.xml" />
   
-  <!-- <op:nowarn id="1" regex="%WIRE_" /> -->
-
   <op:ETS OpenKnxId="0xA0"
     ApplicationNumber="0x12"
     ApplicationVersion="%ROOM_ApplicationVersion%"
     ReplacesVersions="%ROOM_ReplacesVersions%"
     ApplicationRevision="0"
-    ProductName="Raumcontroller"
-    OrderNumber="OpenKnxRoomControl"
+    ProductName="RaumController"
+    OrderNumber="OpenKnxRaumController"
     SerialNumber="0xA012"
     MediumTypes="MT-0 MT-5"
+    UpdateLibraryJson="true"
   />
 
   <op:define prefix="BUTTONLINK"
              share="RaumController-VirtualButton.link.xml"
              noConfigTransfer="true"
              ModuleType="22" >
-    <op:verify File="../library.json" ModuleVersion="%ROOM_ApplicationVersion%" />
   </op:define>
 
   <op:define prefix="BASE"
@@ -48,6 +46,7 @@
 
   <op:define prefix="SENS" 
              share="../lib/OFM-SensorModule/src/Sensormodul.share.xml"
+             KoSingleOffset="43"
              ModuleType="40" >
     <op:verify File="../lib/OFM-SensorModule/library.json" ModuleVersion="%SENS_VerifyVersion%" />
   </op:define>
@@ -61,9 +60,9 @@
              share="../lib/OFM-OneWireModule/src/WireGateway.share.xml"
              template="../lib/OFM-OneWireModule/src/WireGateway.templ.xml"
              NumChannels="30" 
+             KoSingleOffset="30" 
              KoOffset="90"  
-             ModuleType="20" 
-             KoSingleOffset="10" >
+             ModuleType="20" >
     <op:verify File="../lib/OFM-OneWireModule/library.json" ModuleVersion="%WIRE_VerifyVersion%" />
   </op:define>
 
@@ -72,12 +71,12 @@
   => 20*16=320 KOs
   => [120,440[
   -->
-  <op:define prefix="PM" 
-             share="../lib/OFM-PresenceModule/src/PMmodul.share.xml"
-             template="../lib/OFM-PresenceModule/src/PMmodul.templ.xml"
-             NumChannels="16"
-             KoOffset="120" 
-             ModuleType="30">
+  <op:define prefix="PM"
+    share="../lib/OFM-PresenceModule/src/PMmodul.share.xml"
+    template="../lib/OFM-PresenceModule/src/PMmodul.templ.xml"
+    NumChannels="16"
+    KoOffset="120"
+    ModuleType="30">
     <op:verify File="../lib/OFM-PresenceModule/library.json" ModuleVersion="%PM_VerifyVersion%" />
   </op:define>
 
@@ -110,21 +109,30 @@
     <op:verify File="../lib/OFM-VirtualButton/library.json" ModuleVersion="%BTN_VerifyVersion%" />
   </op:define>
 
-  <!-- NumChannels might be at max 11 (KO 45-55) -->
+  <!-- 
+  1 KO / Channel
+  => 6*1=6 KOs (max 10 reserved)
+  => [1320,1326[
+  -->
   <op:define prefix="BI"
     share="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml"
     template="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml"
-    NumChannels="6" 
-    KoOffset="45"
+    NumChannels="6"
+    KoOffset="1320"
     ModuleType="24">
     <op:verify File="../lib/OFM-BinaryInput/library.json" ModuleVersion="%BI_VerifyVersion%" />
   </op:define>
 
+  <!-- 
+  1 KO / Channel
+  => 4*1=4 KOs (max 10 reserved)
+  => [1330,1334[
+  -->
   <op:define prefix="ADC"
     share="../lib/OFM-ADCInput/src/ADCInputChannel.share.xml"
     template="../lib/OFM-ADCInput/src/ADCInputChannel.templ.xml"
     NumChannels="4"
-    KoOffset="56"
+    KoOffset="1330"
     ModuleType="25">
     <op:verify File="../lib/OFM-ADCInput/library.json" ModuleVersion="%ADC_VerifyVersion%" />
   </op:define>
@@ -162,12 +170,12 @@
   => 99*3=297 KOs
   => [920,1217[
   -->
-  <op:define prefix="LOG" 
-             share="../lib/OFM-LogicModule/src/Logikmodul.share.xml" 
-             template="../lib/OFM-LogicModule/src/Logikmodul.templ.xml" 
-             NumChannels="99" 
-             KoOffset="920" 
-             ModuleType="10">
+  <op:define prefix="LOG"
+    share="../lib/OFM-LogicModule/src/Logikmodul.share.xml"
+    template="../lib/OFM-LogicModule/src/Logikmodul.templ.xml"
+    NumChannels="99"
+    KoOffset="920"
+    ModuleType="10">
     <op:verify File="../lib/OFM-LogicModule/library.json" ModuleVersion="%LOG_VerifyVersion%" />
   </op:define>
 

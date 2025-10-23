@@ -12,14 +12,13 @@
   
   <op:ETS OpenKnxId="0xA0"
     ApplicationNumber="0x11"
-    ApplicationVersion="14.8"
-    ReplacesVersions="14.7 14.6 14.5 14.0 13.12 13.11 13.10 13.9 13.8 13.7 13.6 13.0 12.15 12.14 12.13 12.12 12.11 12.10 12.9 12.8 12.7 12.6 12.5 12.4 12.3 12.2 12.1 12.0 11.15 11.14 11.13 11.12 11.11 11.10 11.9 11.8 11.7 11.6 11.5 11.4 11.3 11.2 11.1 11.0"
+    ApplicationVersion="14.10.0"
+    ReplacesVersions="14.9 14.8 14.7 14.6 14.5 14.0 13.12 13.11 13.10 13.9 13.8 13.7 13.6 13.0 12.15 12.14 12.13 12.12 12.11 12.10 12.9 12.8 12.7 12.6 12.5 12.4 12.3 12.2 12.1 12.0 11.15 11.14 11.13 11.12 11.11 11.10 11.9 11.8 11.7 11.6 11.5 11.4 11.3 11.2 11.1 11.0"
     ApplicationRevision="0"
-    ProductName="Raumcontroller"
-    ApplicationName="Raumcontroller"
+    ProductName="RaumController"
     BuildSuffix="-Dev"
     BuildSuffixText=" (Dev)"
-    OrderNumber="OpenKnxRoomControl"
+    OrderNumber="OpenKnxRaumController"
     SerialNumber="0xA011"
     MediumTypes="MT-0 MT-5"
   />
@@ -51,6 +50,7 @@
 
   <op:define prefix="SENS" 
              share="../lib/OFM-SensorModule/src/Sensormodul.share.xml"
+             KoSingleOffset="43"
              ModuleType="40" >
     <op:verify File="../lib/OFM-SensorModule/library.json" ModuleVersion="%SENS_VerifyVersion%" />
   </op:define>
@@ -64,9 +64,9 @@
              share="../lib/OFM-OneWireModule/src/WireGateway.share.xml"
              template="../lib/OFM-OneWireModule/src/WireGateway.templ.xml"
              NumChannels="30" 
+             KoSingleOffset="30" 
              KoOffset="90"  
-             ModuleType="20" 
-             KoSingleOffset="10" >
+             ModuleType="20" >
     <op:verify File="../lib/OFM-OneWireModule/library.json" ModuleVersion="%WIRE_VerifyVersion%" />
   </op:define>
 
@@ -113,20 +113,30 @@
     <op:verify File="../lib/OFM-VirtualButton/library.json" ModuleVersion="%BTN_VerifyVersion%" />
   </op:define>
 
+  <!-- 
+  1 KO / Channel
+  => 6*1=6 KOs (max 10 reserved)
+  => [1320,1326[
+  -->
   <op:define prefix="BI"
     share="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml"
     template="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml"
-    NumChannels="4"
-    KoOffset="45"
+    NumChannels="6"
+    KoOffset="1320"
     ModuleType="24">
     <op:verify File="../lib/OFM-BinaryInput/library.json" ModuleVersion="%BI_VerifyVersion%" />
   </op:define>
 
+  <!-- 
+  1 KO / Channel
+  => 4*1=4 KOs (max 10 reserved)
+  => [1330,1334[
+  -->
   <op:define prefix="ADC"
     share="../lib/OFM-ADCInput/src/ADCInputChannel.share.xml"
     template="../lib/OFM-ADCInput/src/ADCInputChannel.templ.xml"
     NumChannels="4"
-    KoOffset="56"
+    KoOffset="1330"
     ModuleType="25">
     <op:verify File="../lib/OFM-ADCInput/library.json" ModuleVersion="%ADC_VerifyVersion%" />
   </op:define>

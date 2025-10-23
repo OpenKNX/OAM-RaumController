@@ -52,6 +52,9 @@
 			"path": "../OFM-ConfigTransfer"
 		},
 		{
+			"path": "../OFM-UsbExchange"
+		},
+		{
 			"path": "../OGM-HardwareConfig"
 		}
 	],
@@ -69,7 +72,8 @@
 			"stop_token": "cpp",
 			"cstdint": "cpp",
 			"string": "cpp",
-			"string_view": "cpp"
+			"string_view": "cpp",
+			"regex": "cpp"
 		},
 		"cSpell.language": "en,de-DE",
 		"workbench.colorCustomizations": {
@@ -80,7 +84,11 @@
 			"statusBar.foreground": "#000000",
 			"statusBar.background": "#2aa5b3",
 			"titleBar.activeBackground": "#2aa5b3",
-			"titleBar.activeForeground": "#000000"
+			"titleBar.activeForeground": "#000000",
+			"tab.activeBackground": "#07535c",
+			// "tab.activeForeground": "#000000",
+			"tab.activeBorderTop": "#ff9900",
+			// "tab.unfocusedActiveBorderTop": "#ff990044"
 		},
 		"cSpell.words": [
 			"Präsenzkanal",

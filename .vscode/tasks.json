@@ -4,6 +4,50 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "\u2714 (release)",
+            "type": "shell",
+            "command": "scripts/OpenKNX-Build.ps1",
+            "args": [
+                "useCurrent"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "\u2714 (debug)",
+            "type": "shell",
+            "command": "scripts/OpenKNX-Build.ps1",
+            "args": [
+                "-DebugBuild",
+                "useCurrent"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "\u2794 (release)",
+            "type": "shell",
+            "command": "scripts/OpenKNX-Build.ps1",
+            "args": [
+                "useCurrent",
+                "upload"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "\u2794 (debug)",
+            "type": "shell",
+            "command": "scripts/OpenKNX-Build.ps1",
+            "args": [
+                "-DebugBuild",
+                "useCurrent",
+                "upload"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
             "label": "Develop RP2040",
             "type": "shell",
             "command": "scripts/OpenKNX-Build.ps1",

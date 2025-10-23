@@ -9,12 +9,12 @@
             <ParameterTypes>
               <ParameterType Id="%AID%_PT-BTNInputs" Name="BTNInputs">
                 <TypeRestriction Base="Value" SizeInBit="16">
-                  <Enumeration Text="Binäreingang A" DisplayOrder="200" Value="45" Id="%ENID%" />
-                  <Enumeration Text="Binäreingang B" DisplayOrder="200" Value="46" Id="%ENID%" />
-                  <Enumeration Text="Binäreingang C" DisplayOrder="200" Value="47" Id="%ENID%" />
-                  <Enumeration Text="Binäreingang D" DisplayOrder="200" Value="48" Id="%ENID%" />
-                  <Enumeration Text="Binäreingang E" DisplayOrder="200" Value="49" Id="%ENID%" />
-                  <Enumeration Text="Binäreingang F" DisplayOrder="200" Value="50" Id="%ENID%" />
+                  <Enumeration Text="Binäreingang A" DisplayOrder="200" Value="1320" Id="%ENID%" />
+                  <Enumeration Text="Binäreingang B" DisplayOrder="200" Value="1321" Id="%ENID%" />
+                  <Enumeration Text="Binäreingang C" DisplayOrder="200" Value="1322" Id="%ENID%" />
+                  <Enumeration Text="Binäreingang D" DisplayOrder="200" Value="1323" Id="%ENID%" />
+                  <Enumeration Text="Binäreingang E" DisplayOrder="200" Value="1324" Id="%ENID%" />
+                  <Enumeration Text="Binäreingang F" DisplayOrder="200" Value="1325" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
             </ParameterTypes>
