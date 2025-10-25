@@ -48,6 +48,18 @@
             "problemMatcher": []
         },
         {
+            "label": "\u2794\u2794 upload only",
+            "type": "shell",
+            "command": "scripts/OpenKNX-Build.ps1",
+            "args": [
+                "-DebugBuild",
+                "useCurrent",
+                "uploadOnly"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
             "label": "Develop RP2040",
             "type": "shell",
             "command": "scripts/OpenKNX-Build.ps1",

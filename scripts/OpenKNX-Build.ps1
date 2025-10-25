@@ -65,9 +65,11 @@ try {
 
 if ($env -eq "useCurrent") { $env = $currentEnv }
 
-if ($DebugBuild) {
-    lib/OGM-Common/scripts/build/OpenKNX-Build.ps1 -DebugBuild -env $env
-    if ($target -eq "upload") {
+if ($DebugBuild -or $target -eq "uploadOnly") {
+    if ($target -ne "uploadOnly") {
+        lib/OGM-Common/scripts/build/OpenKNX-Build.ps1 -DebugBuild -env $env
+    }
+    if ($target -eq "upload" -or $target -eq "uploadOnly") {
         $success = $true
         $monitorStarted = StopPioMontor
         if ($currentProcessor -eq "rp2040") {

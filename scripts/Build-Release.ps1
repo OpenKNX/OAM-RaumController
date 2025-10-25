@@ -45,16 +45,16 @@ if ($releaseIndication -eq "Beta") {
     lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild  release_DEVICE_SMARTMF_SENSORMODUL firmware-SmartMF-Sensormodul-RP2040 rp2040-tp
     if (!$?) { exit 1 }
 
-    # # Dominiks HF-PM
-    # scripts/Build-Step-Debug.ps1 release_DEVICE_UP1_PM_HF firmware-OpenKNX-UP1-PM-HF rp2040-tp
-    # if (!$?) { exit 1 }
+    # Dominiks HF-PM
+    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild  release_DEVICE_UP1_PM_HF firmware-OpenKNX-UP1-PM-HF rp2040-tp
+    if (!$?) { exit 1 }
 
     # # build firmware for OpenKNX-REG1-Base-V1
-    # scripts/Build-Step-Debug.ps1 release_DEVICE_REG1_BASE firmware-OpenKNX-REG1-BASE rp2040-tp
+    # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild  release_DEVICE_REG1_BASE firmware-OpenKNX-REG1-BASE rp2040-tp
     # if (!$?) { exit 1 }
     
     # # build firmware for 1TE-RP2040-SmartMF
-    # scripts/Build-Step-Debug.ps1 release_DEVICE_SMARTMF_1TE_REG firmware-SmartMF_1TE_REG rp2040-tp
+    # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild  release_DEVICE_SMARTMF_1TE_REG firmware-SmartMF_1TE_REG rp2040-tp
     # if (!$?) { exit 1 }
 
     lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild release_PresenceMultiSensor_ABSmartHouse firmware-AB-SmartHouse-PresenceMultiSensor rp2040-tp
@@ -65,7 +65,11 @@ if ($releaseIndication -eq "Beta") {
 
 }
 
-
+# if ($releaseIndication -eq "Release") {
+#     # build firmware for PiPico-BCU-Connector
+#     lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_PIPICO_BCU_CONNECTOR firmware-OpenKNX-PiPico-BCU-Connector rp2040-tp
+#     if (!$?) { exit 1 }
+# } else
 if ($releaseIndication -eq "Release") {
     # # build firmware for RP2040 RoomControl breakout board
     # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_Sensormodul_Breakout_RP2040 firmware-RaumController-Breakout-RP2040 rp2040-tp RaumController-Breakout-Board-Just-for-testers
