@@ -44,6 +44,9 @@
                 "useCurrent",
                 "upload"
             ],
+            "presentation": {
+                "panel": "shared"
+            },
             "group": "build",
             "problemMatcher": []
         },
@@ -58,6 +61,13 @@
             ],
             "group": "build",
             "problemMatcher": []
+        },
+        {
+            "label": "Start Monitor",
+            "type": "shell",
+            "command": "pio device monitor",
+            "dependsOn": ["\u2794 (debug)"],
+            "group": "build",
         },
         {
             "label": "Develop RP2040",
