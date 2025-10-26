@@ -12,9 +12,9 @@ c6f1a3d v1 lib/OFM-Network https://github.com/OpenKNX/OFM-Network
 c38bdee v1 lib/OFM-OneWireModule https://github.com/OpenKNX/OFM-OneWireModule.git
 2c4571b v1 lib/OFM-PresenceModule https://github.com/OpenKNX/OFM-PresenceModule
 c825b0c v1 lib/OFM-SensorModule https://github.com/OpenKNX/OFM-SensorModule
-e2062fc v1dev lib/OFM-ShutterControllerModule https://github.com/OpenKNX/OFM-ShutterControllerModule
+270c762 v1 lib/OFM-ShutterControllerModule https://github.com/OpenKNX/OFM-ShutterControllerModule
 a64279e main lib/OFM-SmartMF https://github.com/OpenKNX/OFM-SmartMF
-2c0bbb7 v1dev lib/OFM-UsbExchange https://github.com/OpenKNX/OFM-UsbExchange
+e869e19 v1 lib/OFM-UsbExchange https://github.com/OpenKNX/OFM-UsbExchange
 06ebdcb v1 lib/OFM-VirtualButton https://github.com/OpenKNX/OFM-VirtualButton.git
 193e462 v1 lib/OGM-Common https://github.com/OpenKNX/OGM-Common
 d4f8a07 v1 lib/OGM-HardwareConfig https://github.com/OpenKNX/OGM-HardwareConfig
