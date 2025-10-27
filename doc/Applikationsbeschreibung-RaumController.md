@@ -18,6 +18,10 @@ Alles ohne zentralen Server.
 
 Im folgenden werden Änderungen an der Applikation erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren. Dabei wird primär auf Änderungen in den beteiligten Modulen hingewiesen. Detailänderungen können dann in den jeweiligen Applikationsbeschreibungen nachgelesen werden.
 
+27.10.2025: Firmware 5.1.3, Applikation 5.1:
+
+- FIX: FileTransferModule 0.1.4 für Wiederaufnahme nach einen Abbruch beim Firmware-Update 
+
 26.10.2025: Firmware 5.1, Applikation 5.1:
 
 - NEU: Erste Version 5.1 vom RaumController
