@@ -26,7 +26,7 @@ Im folgenden werden Änderungen an der Applikation erfasst, damit man nicht imme
 - NEU: Konfigurationstransfer in der Version 0.4 zugefügt
 - NEU: Sensoren in der Version 4.10 zugefügt
 - NEU: 1-Wire in der Version 2.1 mit 30 Kanälen zugefügt
-- NEU: Präsenzmeler in der Version 3.9 mit 16 Kanälen zugefügt
+- NEU: Präsenzmelder in der Version 3.9 mit 16 Kanälen zugefügt
 - NEU: Jalousiesteuerung in der Version 0.4 mit 3 Kanälen zugefügt
 - NEU: Virtuelle Taster in der Version 0.5 mit 10 Kanälen zugefügt
 - NEU: Binäreingänge in der Version 0.2 mit 6 Kanälen zugefügt
