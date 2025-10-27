@@ -211,7 +211,11 @@ Somit hat sich jede KO-Nummer vom Analogeingang um den Wert +1274 verschoben.
 
 ### **Update der Applikation**
 
-Das Update führt man durch wie in der OpenKNX-Dokumentation beschrieben: [Update der Produktdatenbank in der ETS](https://openknx.atlassian.net/wiki/spaces/OpenKNX/pages/9469953/Update+der+Produktdatenbank+in+der+ETS#Wie-aktualisiere-ich-ein-Ger%C3%A4t%3F)
+Das Update führt man durch wie in der OpenKNX-Dokumentation beschrieben: [Update der Produktdatenbank in der ETS](https://openknx.atlassian.net/wiki/spaces/OpenKNX/pages/9469953/Update+der+Produktdatenbank+in+der+ETS#Wie-aktualisiere-ich-ein-Ger%C3%A4t%3F).
+
+#### **Nach dem Update**
+
+Da sich seit dem letzten Release vom Sensormodul unser KNX-Stack stark verändert hat, erfordert auch das Firmware-Update einen manuellen Schritt. Nach einem Firmware-Update ist die PA wieder 15.15.255 und muss erneut auf den alten Wert gesetzt werden.
 
 
 
