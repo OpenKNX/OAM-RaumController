@@ -219,7 +219,7 @@ Das Update führt man durch wie in der OpenKNX-Dokumentation beschrieben: [Updat
 
 #### **Nach dem Update**
 
-Da sich seit dem letzten Release vom Sensormodul unser KNX-Stack stark verändert hat, erfordert auch das Firmware-Update einen manuellen Schritt. Nach einem Firmware-Update ist die PA wieder 15.15.255 und muss erneut auf den alten Wert gesetzt werden.
+Da sich seit dem letzten Release vom Sensormodul unser KNX-Stack stark verändert hat, erfordert auch das Firmware-Update einen manuellen Schritt. Nach einem Firmware-Update ist die PA wieder 15.15.255 und muss erneut auf den alten Wert gesetzt werden. Bitte dazu auch die Hinweise zum Aktualisieren der[Geräte-Firmware](https://openknx.atlassian.net/wiki/spaces/OpenKNX/pages/655484/Ger+te-Firmware#Nach-der-%C3%9Cbertragung) beachten.
 
 
 
