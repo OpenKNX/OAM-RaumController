@@ -63,6 +63,9 @@ if ($releaseIndication -eq "Beta") {
     lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild release_DEVICE_PIPICO_BCU_CONNECTOR firmware-OpenKNX-PiPico-BCU-Connector rp2040-tp
     if (!$?) { exit 1 }
 
+    # # build firmware for RP2350
+    # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild release_AB_TouchRound_RP2350 firmware-AB-TouchRound-RP2350 rp2350-tp
+    # if (!$?) { exit 1 }
 }
 
 # if ($releaseIndication -eq "Release") {
@@ -139,9 +142,6 @@ if ($releaseIndication -eq "Release") {
     lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_PresenceWall_ABSmartHouse firmware-AB-SmartHouse-PresenceWall rp2040-tp
     if (!$?) { exit 1 }
 
-    # build firmware for RP2350
-    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_AB_TouchRound_RP2350 firmware-AB-TouchRound-RP2350 rp2350-tp
-    if (!$?) { exit 1 }
 }
 
 # Remove unnecessary OTA upload scripts
