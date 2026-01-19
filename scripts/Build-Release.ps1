@@ -41,13 +41,13 @@ if ($releaseIndication -eq "Beta") {
     # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild  release_Sensormodul_Breakout_RP2040 firmware-RaumController-Breakout-RP2040 rp2040-tp RaumController-OpenKNX-Breakout-Board-Just-for-testers
     # if (!$?) { exit 1 }
 
-    # build firmware productive RP2040 RoomControl
-    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild  release_DEVICE_SMARTMF_SENSORMODUL firmware-SmartMF-Sensormodul-RP2040 rp2040-tp
-    if (!$?) { exit 1 }
+    # # build firmware productive RP2040 RoomControl
+    # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild  release_DEVICE_SMARTMF_SENSORMODUL firmware-SmartMF-Sensormodul-RP2040 rp2040-tp
+    # if (!$?) { exit 1 }
 
-    # Dominiks HF-PM
-    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild  release_DEVICE_UP1_PM_HF firmware-OpenKNX-UP1-PM-HF rp2040-tp
-    if (!$?) { exit 1 }
+    # # Dominiks HF-PM
+    # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild  release_DEVICE_UP1_PM_HF firmware-OpenKNX-UP1-PM-HF rp2040-tp
+    # if (!$?) { exit 1 }
 
     # # build firmware for OpenKNX-REG1-Base-V1
     # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild  release_DEVICE_REG1_BASE firmware-OpenKNX-REG1-BASE rp2040-tp
@@ -60,20 +60,19 @@ if ($releaseIndication -eq "Beta") {
     lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild release_PresenceMultiSensor_ABSmartHouse firmware-AB-SmartHouse-PresenceMultiSensor rp2040-tp
     if (!$?) { exit 1 }
 
-    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild release_DEVICE_PIPICO_BCU_CONNECTOR firmware-OpenKNX-PiPico-BCU-Connector rp2040-tp
-    if (!$?) { exit 1 }
+    # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild release_DEVICE_PIPICO_BCU_CONNECTOR firmware-OpenKNX-PiPico-BCU-Connector rp2040-tp
+    # if (!$?) { exit 1 }
 
     # # build firmware for RP2350
     # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild release_AB_TouchRound_RP2350 firmware-AB-TouchRound-RP2350 rp2350-tp
     # if (!$?) { exit 1 }
 }
 
-# if ($releaseIndication -eq "Release") {
-#     # build firmware for PiPico-BCU-Connector
-#     lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_PIPICO_BCU_CONNECTOR firmware-OpenKNX-PiPico-BCU-Connector rp2040-tp
-#     if (!$?) { exit 1 }
-# } else
-if ($releaseIndication -eq "Release") {
+if ($releaseIndication -eq "Release-Debug") {
+    # build firmware for PiPico-BCU-Connector
+    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_PIPICO_BCU_CONNECTOR firmware-OpenKNX-PiPico-BCU-Connector rp2040-tp
+    if (!$?) { exit 1 }
+} elseif ($releaseIndication -eq "Release") {
     # # build firmware for RP2040 RoomControl breakout board
     # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_Sensormodul_Breakout_RP2040 firmware-RaumController-Breakout-RP2040 rp2040-tp RaumController-Breakout-Board-Just-for-testers
     # if (!$?) { exit 1 }
@@ -111,6 +110,10 @@ if ($releaseIndication -eq "Release") {
     # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_RealPresence firmware-RealPresence rp2040-tp
     # if (!$?) { exit 1 }
 
+    # build firmware for SmartMF-RealPresence (sisamiwe version)
+    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_BOARD_SMARTMF_RealPresence_V1_2 firmware-SmartMF-RealPresence-v1.2 rp2040-tp
+    if (!$?) { exit 1 }
+
     # build firmware for SmartMF-RealPresence-V2
     lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_SMARTMF_REALPRESENCE_V2 firmware-SmartMF-RealPresence-V2 rp2040-tp
     if (!$?) { exit 1 }
@@ -126,9 +129,6 @@ if ($releaseIndication -eq "Release") {
     # build firmware for REG1_LAN_BASE / ESP32+DCU
     lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_REG1_LAN_BASE firmware-OpenKNX-REG1-LAN-BASE esp32-ip
     if (!$?) { exit 1 }
-
-
-
 
     # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_RealPresence_HLK firmware-Smart-MF-RealPresence-2.0 rp2040-tp
     # if (!$?) { exit 1 }

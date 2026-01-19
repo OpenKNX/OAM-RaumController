@@ -18,6 +18,17 @@ Alles ohne zentralen Server.
 
 Im folgenden werden Änderungen an der Applikation erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren. Dabei wird primär auf Änderungen in den beteiligten Modulen hingewiesen. Detailänderungen können dann in den jeweiligen Applikationsbeschreibungen nachgelesen werden.
 
+19.01.2026: Firmware 5.1.13, Appliation 5.1:
+
+- HOTFIX: Der Sensor SCD4x konnte bei einem Neustart in einen Zustand geraten, bei dem er keine Werte sendet (sporadisch häufig). In ganz seltenen Fällen konnte das dazu führen, dass kein Sensor mehr seine Werte senden konnte.
+
+- Das Präsenzmodul wurde auf die Version 3.9.1 aktualisiert (Änderungshistorie siehe dort).
+- Das Sensormodul wurde auf die Version 4.10.1 aktualisiert (Änderungshistorie siehe dort).
+
+31.10.2025: Firmware 5.1.5, Applikation 5.1:
+
+- Update der Hardwareliste, auf der der RaumController installiert werden kann. Keine Änderungen an der Firmware.
+
 27.10.2025: Firmware 5.1.3, Applikation 5.1:
 
 - FIX: FileTransferModule 0.1.4 für Wiederaufnahme nach einen Abbruch beim Firmware-Update 
