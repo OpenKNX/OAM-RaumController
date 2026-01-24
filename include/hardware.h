@@ -280,6 +280,30 @@
         #define DEVICE_NAME "AB-SmartHouse Presence Wall"
     #endif
 
+    #ifdef BOARD_AB_PRE_WALL_OUT
+        #define DEVICE_ID "AB-PRE-WALL-OUT"
+        #define HARDWARE_NAME "AB-PRE-WALL-OUT"
+        #define DEVICE_NAME "AB-SmartHouse Presence Wall Outside"
+        #define PROG_LED_PIN 10
+        #define PROG_LED_PIN_ACTIVE_ON HIGH
+        #define PROG_BUTTON_PIN 9
+        #define PROG_BUTTON_PIN_INTERRUPT_ON FALLING
+        #define INFO_LED_PIN 11
+        #define INFO_LED_PIN_ACTIVE_ON HIGH
+        #define KNX_UART_TX_PIN 12
+        #define KNX_UART_RX_PIN 13
+        #define SAVE_INTERRUPT_PIN 0
+        #define I2C_WIRE Wire1
+        #define I2C_SDA_PIN 2
+        #define I2C_SCL_PIN 3
+        #define HF_SERIAL Serial2
+        #define HF_SERIAL_SPEED 115200
+        #define HF_POWER_PIN 27
+        #define HF_UART_TX_PIN 4
+        #define HF_UART_RX_PIN 5
+        #define PIR_PIN 18
+    #endif
+
     #ifdef BOARD_AB_TOUCH_ROUND_RP2350
         #define DEVICE_ID "AB-TOUCH-ROUND"
         #define HARDWARE_NAME "AB-TOUCH-ROUND"

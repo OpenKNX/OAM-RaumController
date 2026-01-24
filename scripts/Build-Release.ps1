@@ -139,6 +139,9 @@ if ($releaseIndication -eq "Release") {
     lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_PresenceWall_ABSmartHouse firmware-AB-SmartHouse-PresenceWall rp2040-tp
     if (!$?) { exit 1 }
 
+    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_PresenceWallOutside_ABSmartHouse firmware-AB-SmartHouse-PresenceWall-Outside rp2040-tp
+    if (!$?) { exit 1 }
+
     # build firmware for RP2350
     lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_AB_TouchRound_RP2350 firmware-AB-TouchRound-RP2350 rp2350-tp
     if (!$?) { exit 1 }
