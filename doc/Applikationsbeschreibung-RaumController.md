@@ -4,28 +4,50 @@ Die vorliegende Applikation kombiniert alle notwendigen Module, um die Steuerung
 
 Diese Applikation ist eine Weiterentwicklung vom [Sensormodul](https://github.com/OpenKNX/OAM-Sensormodul). Sie ist Update-Kompatibel und kann direkt als [Update von der Version 4.x](#update-vom-sensormodul-4x) vom Sensormodul verwendet werden.
 
-### **Funktionsübersicht**
+### **Motivation**
 
+KNX als System, mit intelligenten Geräten, die direkt miteinander über den KNX-Bus kommunizieren, erlaubt es sehr gut, eine dezentrale Steuerung zu realisieren. Will man allerdings regeln oder automatisieren, so landet man schnell bei zentralen Servern, die ein Single-Point-Of-Failure darstellen. Der RaumController bietet die Möglichkeit, viele der Raumbezogenen lokalen Regeln und Automatismen direkt in jedem Raum abzubilden, ohne auf einen Zentralen Server ausweichen zu müssen.
+
+Durch das modulare Kon​zept von OpenKNX und durch starke Hardware-Abstraktionskonzepte kann der RaumController auf einer großen Anzahl unterschiedlicher OpenKNX-Hardware laufen und deren spezifische Hardwaremöglichkeiten nutzen, sofern diese vorhanden sind. So kann zum Beispiel der Präsenzmelder auf einer REG1-Hardware für den Schaltschrank als Virtueller Präsenzmelder laufen und alten PIR-Meldern in einzelnen Räumen zum neuen Leben verhelfen. Auf einer Präsenzmelder-Hardware kann der Präsenzmelder auch die Bewegungs- und Lichtsensoren der Hardware auswerten und als echter Präsenzmelder fungieren. Ähnlich mit dem Taster: Auf einer Taster-Hardware werden die physikalisch vorhandenen Tasten ausgewertet, auf anderer Hardware werden die Tasten über den Bus verbunden und er fungiert als Virtueller Taster.
+
+Es geht auch nicht darum, einen RaumController als Gerät pro Raum zu haben, man wird sowieso nicht alle enthaltenen Funktionen auf eine Hardware bekommen. Es geht darum, an möglichst allen Stellen die Möglichkeit zu haben, das zu realisieren, was gerade an dieser Stelle sinnvoll ist. Wenn man z.B. in einem Raum OpenKNX-Ready-Sensormodul (Hardware), ein OpenKNX-Ready-Präsenzmelder (Hardware) und ein OpenKNX-Taster (Hardware) hat, hat man 3 mal den RaumController zur Verfügung, um natürlich primär die zur Hardware passenden Aufgaben übernehmen, aber auch zusätzlich den Rollladen steuern (Jalousie- und Rollladensteuerung), die Dunstabzugshaube steuern (Zustandsautomat), Tagesphasen für den Raum berechnen (Logikmodul mit Zeitschaltuhren) usw. 
+
+Alles ohne zentralen Server.
 
 ## **Änderungshistorie**
 
 Im folgenden werden Änderungen an der Applikation erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren. Dabei wird primär auf Änderungen in den beteiligten Modulen hingewiesen. Detailänderungen können dann in den jeweiligen Applikationsbeschreibungen nachgelesen werden.
 
-15.10.2025: Firmware 5.0, Applikation 5.0:
+19.01.2026: Firmware 5.1.13, Appliation 5.1:
 
-- NEU: Erste Version 5.0 vom RaumController
-- NEU: Common in der Version 1.4 zugefügt
+- HOTFIX: Der Sensor SCD4x konnte bei einem Neustart in einen Zustand geraten, bei dem er keine Werte sendet (sporadisch häufig). In ganz seltenen Fällen konnte das dazu führen, dass kein Sensor mehr seine Werte senden konnte.
+
+- Das Präsenzmodul wurde auf die Version 3.9.1 aktualisiert (Änderungshistorie siehe dort).
+- Das Sensormodul wurde auf die Version 4.10.1 aktualisiert (Änderungshistorie siehe dort).
+
+31.10.2025: Firmware 5.1.5, Applikation 5.1:
+
+- Update der Hardwareliste, auf der der RaumController installiert werden kann. Keine Änderungen an der Firmware.
+
+27.10.2025: Firmware 5.1.3, Applikation 5.1:
+
+- FIX: FileTransferModule 0.1.4 für Wiederaufnahme nach einen Abbruch beim Firmware-Update 
+
+26.10.2025: Firmware 5.1, Applikation 5.1:
+
+- NEU: Erste Version 5.1 vom RaumController
+- NEU: Common in der Version 1.5 zugefügt
 - NEU: Netzwerk in der Version 0.5 zugefügt
 - NEU: Konfigurationstransfer in der Version 0.4 zugefügt
-- NEU: Sensoren in der Version 4.9 zugefügt
-- NEU: 1-Wire in der Version 2.0 mit 30 Kanälen zugefügt
-- NEU: Präsenzmeler in der Version 3.8 mit 16 Kanälen zugefügt
-- NEU: Jalousiesteuerung in der Version 0.3 mit 3 Kanälen zugefügt
+- NEU: Sensoren in der Version 4.10 zugefügt
+- NEU: 1-Wire in der Version 2.1 mit 30 Kanälen zugefügt
+- NEU: Präsenzmelder in der Version 3.9 mit 16 Kanälen zugefügt
+- NEU: Jalousiesteuerung in der Version 0.4 mit 3 Kanälen zugefügt
 - NEU: Virtuelle Taster in der Version 0.5 mit 10 Kanälen zugefügt
 - NEU: Binäreingänge in der Version 0.2 mit 6 Kanälen zugefügt
 - NEU: Analogeingänge in der Version 0.1 mit 4 Kanälen zugefügt
 - NEU: Zähler in der Version 0.5 nut 10 Kanälen zugefügt
-- NEU: Zustandsautomaten in der Version 0.5 mit 5 Kanälen zugefügt
+- NEU: Zustandsautomaten in der Version 0.6 mit 5 Kanälen zugefügt
 - NEU: Logiken in der Version 3.7 mit 99 Kanälen zugefügt
 - NEU: Funktionsblöcke in der Version 0.6 mit 10 Kanälen zugefügt
 
@@ -112,17 +134,17 @@ Kompliziertere logische Funktionen, die nur sehr aufwändig mit dem Logikmodul z
 
 ## **Update vom Sensormodul 4.x**
 
-Der RaumController ist eine updatefähige Applikation zum Sensormodul 4.x, das ist auch der Grund, warum die erste Version vom RaumController 5.0 ist, das ist eines der Update-Kriterien der ETS.
+Der RaumController ist eine updatefähige Applikation zum Sensormodul 4.x, das ist auch der Grund, warum die erste Version vom RaumController > 5.0 ist, das ist eines der Update-Kriterien der ETS.
 
 Da die neue Applikation aber viele Änderungen beinhaltet, sind auch Vorarbeiten im Sensormodul **vor** den Update notwendig.
 
 Als erstes (wie be jedem Update einer Applikation): Projekt exportieren, damit man einen Weg zurück hat.
 
-Anschließend kann man das Gerät mit der Version 4.x kopieren - dann kann man nach dem Update vergleichen, falls sich irgendwas anders verhält.
+Anschließend kann man das Gerät mit der Version 4.x kopieren und die Kopie parken - dann kann man nach dem Update die Geräte vergleichen, falls sich irgendwas anders verhält.
 
-Wenn man im Sensormodul 4.x mehr als 16 Kanäle für Präsenzmelder verwendet hat: Kanalanzahl auf 16 reduzieren. Die Definitionen für Kanäle >16 kann man mit dem Konfigurationstransfer->Kanalkopie auf Kanäle <= 16 übertragen, falls man Lücken gelassen hat. Ansonsten sollte man diese Kanäle auf ein anderes Gerät übertragen oder sie gehen verloren.
+Wenn man im Sensormodul 4.x mehr als 16 Kanäle für Präsenzmelder verwendet hat: Kanalanzahl auf 16 reduzieren. Die Definitionen für Kanäle >16 kann man mit dem Konfigurationstransfer->Kanalkopie auf Kanäle <= 16 übertragen, falls man Lücken gelassen hat. Ansonsten sollte man diese Kanäle auf ein anderes Gerät übertragen. Hat man eine Gerätekopie gemacht, sind die Kanäle dort noch vorhanden. Auf dem aktualisierten Gerät sind die Kanäle nicht mehr verfügbar.
 
-Wenn man im Sensormodul 4.x mehr als 10 Kanäle für Virtuelle Taster verwendet hat: Kanalanzahl auf 10 reduzieren. Die Definitionen für Kanäle >10 kann man mit dem Konfigurationstransfer->Kanalkopie auf Kanäle <= 10 übertragen, falls man Lücken gelassen hat. Ansonsten sollte man diese Kanäle auf ein anderes Gerät übertragen oder sie gehen verloren.
+Wenn man im Sensormodul 4.x mehr als 10 Kanäle für Virtuelle Taster verwendet hat: Kanalanzahl auf 10 reduzieren. Die Definitionen für Kanäle >10 kann man mit dem Konfigurationstransfer->Kanalkopie auf Kanäle <= 10 übertragen, falls man Lücken gelassen hat. Ansonsten sollte man diese Kanäle auf ein anderes Gerät übertragen. Hat man eine Gerätekopie gemacht, sind die Kanäle dort noch vorhanden. Auf dem aktualisierten Gerät sind die Kanäle nicht mehr verfügbar.
 
 Ferner haben sich einige KO-Nummern verschoben. Das ist unkritisch, die entsprechenden GA-Verknüpfungen bleiben erhalten. Falls allerdings in Logiken Eingänge mit internen KO-Verknüpfungen genutzt wurden, muss man schauen, ob die jetzt noch auf die KO-Nummern zeigen, die man erwartet. Dazu ist ein Vergleich mit dem zu Anfang Kopierten Sensormodul angeraten.
 
@@ -131,10 +153,10 @@ Ferner haben sich einige KO-Nummern verschoben. Das ist unkritisch, die entsprec
 
 Folgende KO-Nummern haben sich verschoben:
 
-**Änderung von zentralen KO-Nummern (in Common):**
+### **Änderung von zentralen KO-Nummern (in Common):**
 
 
-| KO                               | alt | NEU (in 5.0) | Kommentar                                |
+| KO                               | alt | NEU (in 5.1)   | Kommentar                                |
 |----------------------------------|-----|----------------|------------------------------------------|
 | In Betrieb                       | 1   | 1              | (unverändert)                            |
 | **Uhrzeit**                      | 2 * | 2              | KO war bislang geteilt mit Uhrzeit/Datum |
@@ -152,19 +174,63 @@ Folgende KO-Nummern haben sich verschoben:
 
 \*: Doppelbelegung der KO-Nummer. Einblendung war abhängig von Konfiguration.
 
-**Alle KO vom Virtuellen Taster haben sich verschoben:**
+### **Änderung von KO-Nummern im Sensormodul:**
+
+
+| KO                               | alt | NEU (in 5.1)   
+|----------------------------------|-----|----------------
+| Sensorwerte anfordern            | 43  | 43             
+| Temperatur                       | 60  | 45             
+| Extern: Temperatur 1             | 70  | 46             
+| Extern: Temperatur 2             | 71  | 47             
+| Luftfeuchte                      | 61  | 48             
+| Extern: Luftfeuchte 1            | 72  | 49             
+| Extern: Luftfeuchte 2            | 73  | 50             
+| Luftdruck                        | 62  | 51             
+| Extern: Luftdruck 1              | 74  | 52             
+| Extern: Luftdruck 2              | 75  | 53             
+| VOC                              | 63  | 54             
+| Extern: VOC 1                    | 76  | 55             
+| Extern: VOC 2                    | 77  | 56             
+| CO2                              | 64  | 57             
+| CO2-VOC                          | 65  | 58             
+| Extern: CO2 1                    | 78  | 59             
+| Extern: Co2 2                    | 79  | 60             
+| Helligkeit                       | 87  | 61             
+| Extern: Helligkeit 1             | 80  | 62             
+| Extern: Helligkeit 2             | 81  | 63             
+| Entfernung                       | 88  | 64             
+| Extern: Entfernung 1             | 82  | 65             
+| Extern: Entfernung 2             | 83  | 66             
+| Taupunkt                         | 66  | 85             
+| Behaglichkeit                    | 67  | 86             
+| Luftqualitätsampel (1-6)         | 68  | 87             
+
+### **Alle KO vom Virtuellen Taster haben sich verschoben:**
 - Beginn der KO-Nummern vom Virtuellen Taster beim Sensormodul 4.x: 1220
-- Beginn der KO-Nummern vom Virtuellen Taster beim RaumController 5.0: 610
+- Beginn der KO-Nummern vom Virtuellen Taster beim RaumController 5.1: 610
 
-Somit hat sich jede KO-Nummer um den Wert -610 verschoben.
+Somit hat sich jede KO-Nummer vom Virtuellen Taster um den Wert -610 verschoben.
 
+### **Alle KO vom Binäreingang haben sich verschoben**
+- Beginn der KO-Nummern vom Binäreingang beim Sensormodul 4.x: 45
+- Beginn der KO-Nummern vom Binäreingang beim RaumController 5.1: 1320
 
-Nach dem Update heißt das Gerät in der ETS nicht mehr Sensormodul sondern RaumController, aber nur, wenn man im Eigenschaften-Fenster vom Gerät den Namen nicht geändert hat - er also auf Sensormoul stand.
-Leider kennt die ETS für ein Gerät nur einen Standrard-Namen. Hat man also mehrere Geräte mit dem Standardnamen "Sensormodul" und hat nur ein Gerät auf RaumController aktualisiert, so heißen spätestens nach einem Neuladen des Projektes **alle** früheren "Sensormodul"-Geräte jetzt RaumController.
-Das bedeutet nicht, dass alle diese Geräte aktualisiert worden sind! Nur der angezeigte Namen wird vom neusten Gerät übernommen.
-Wenn man sowieso alle Sensormodule aktualisieren will, ist das kein Problem. Sollte man noch Sensormodule behalten wollen (weil man z.B. mehr als 16 Präsenzkanäle braucht), dann kann man den alten Namen bekommen, indem man bei den Eigenschaften als Name wieder "Sensormodul" eintippt.
+Somit hat sich jede KO-Nummer vom Binäreingang um den Wert +1275 verschoben.
 
+### **Alle KO vom Analogeingang haben sich verschoben**
+- Beginn der KO-Nummern vom Analogeingang beim Sensormodul 4.x: 56
+- Beginn der KO-Nummern vom Analogeingang beim RaumController 5.1: 1330
 
+Somit hat sich jede KO-Nummer vom Analogeingang um den Wert +1274 verschoben.
+
+### **Update der Applikation**
+
+Das Update führt man durch wie in der OpenKNX-Dokumentation beschrieben: [Update der Produktdatenbank in der ETS](https://openknx.atlassian.net/wiki/spaces/OpenKNX/pages/9469953/Update+der+Produktdatenbank+in+der+ETS#Wie-aktualisiere-ich-ein-Ger%C3%A4t%3F).
+
+#### **Nach dem Update**
+
+Da sich seit dem letzten Release vom Sensormodul unser KNX-Stack stark verändert hat, erfordert auch das Firmware-Update einen manuellen Schritt. Nach einem Firmware-Update ist die PA wieder 15.15.255 und muss erneut auf den alten Wert gesetzt werden. Bitte dazu auch die Hinweise zum Aktualisieren der[Geräte-Firmware](https://openknx.atlassian.net/wiki/spaces/OpenKNX/pages/655484/Ger+te-Firmware#Nach-der-%C3%9Cbertragung) beachten.
 
 
 
