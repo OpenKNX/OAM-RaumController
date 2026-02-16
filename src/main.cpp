@@ -1,4 +1,7 @@
 #include "Logic.h"
+// #include "LogicRGBOutput.h"
+#include "SmartMF.h"
+#include "Feedback.h"
 #include "MeterModule.h"
 #include "OpenKNX.h"
 #ifdef WIREMODULE
@@ -16,6 +19,7 @@
 #include "ShutterControllerModule.h"
 #include "FunctionBlocksModule.h"
 #include "FileTransferModule.h"
+#include "StatusLEDModule.h"
 
 #ifdef ARDUINO_ARCH_RP2040
     #include "UsbExchangeModule.h"
@@ -51,10 +55,6 @@ void setup()
     pinMode(ONEWIRE_5V_ENABLE, OUTPUT);
     digitalWrite(ONEWIRE_5V_ENABLE, HIGH);
     #endif
-#endif
-
-#ifdef DEVICE_UP1_PM_HF
-    pinMode(26, INPUT_PULLUP);
 #endif
 
     openknx.init();
@@ -106,7 +106,16 @@ openknx.addModule(5, openknxFileTransferModule);
 #ifdef ARDUINO_ARCH_RP2040
     openknx.addModule(15, openknxUsbExchangeModule);
 #endif
-    openknx.setup();
+    openknx.addModule(16, smartmf);
+#if defined(OPENKNX_BUZZER_PIN) || defined(OPENKNX_VIBRATION_PIN)
+    openknx.addModule(17, openknxFeedback);
+#else
+    openknx.unsupportedEtsModule(ETS_ModuleId_BUZZ);
+#endif
+    openknx.addModule(18, openknxStatusLEDModule);
+
+
+openknx.setup();
 }
 
 void loop()

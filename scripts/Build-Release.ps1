@@ -50,15 +50,15 @@ if ($releaseIndication -eq "Beta") {
     # if (!$?) { exit 1 }
 
     # # build firmware for OpenKNX-REG1-Base-V1
-    # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild  release_DEVICE_REG1_BASE firmware-OpenKNX-REG1-BASE rp2040-tp
-    # if (!$?) { exit 1 }
+    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild  release_DEVICE_REG1_BASE firmware-OpenKNX-REG1-BASE rp2040-tp
+    if (!$?) { exit 1 }
     
     # # build firmware for 1TE-RP2040-SmartMF
     # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild  release_DEVICE_SMARTMF_1TE_REG firmware-SmartMF_1TE_REG rp2040-tp
     # if (!$?) { exit 1 }
 
-    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild release_PresenceMultiSensor_ABSmartHouse firmware-AB-SmartHouse-PresenceMultiSensor rp2040-tp
-    if (!$?) { exit 1 }
+    # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild release_PresenceMultiSensor_ABSmartHouse firmware-AB-SmartHouse-PresenceMultiSensor rp2040-tp
+    # if (!$?) { exit 1 }
 
     # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild release_DEVICE_PIPICO_BCU_CONNECTOR firmware-OpenKNX-PiPico-BCU-Connector rp2040-tp
     # if (!$?) { exit 1 }
@@ -68,14 +68,30 @@ if ($releaseIndication -eq "Beta") {
     # if (!$?) { exit 1 }
 }
 
-if ($releaseIndication -eq "Release-Debug") {
-    # # build firmware for PiPico-BCU-Connector
-    # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_PIPICO_BCU_CONNECTOR firmware-OpenKNX-PiPico-BCU-Connector rp2040-tp
-    # if (!$?) { exit 1 }
+if ($releaseIndication -eq "Release-Beta") {
+    # build firmware for PiPico-BCU-Connector
+    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_PIPICO_BCU_CONNECTOR firmware-OpenKNX-PiPico-BCU-Connector rp2040-tp
+    if (!$?) { exit 1 }
+
+    # build firmware for OpenKNX-REG1-Base-V1
+    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild release_DEVICE_REG1_BASE firmware-OpenKNX-REG1-BASE rp2040-tp
+    if (!$?) { exit 1 }
+
+    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild release_PresenceMultiSensor_ABSmartHouse firmware-AB-SmartHouse-PresenceMultiSensor rp2040-tp
+    if (!$?) { exit 1 }
 
     # build firmware for RP2040 sensormodule 
-    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_SMARTMF_SENSORMODUL firmware-SmartMF-Sensormodul-RP2040 rp2040-tp
+    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild release_DEVICE_SMARTMF_SENSORMODUL firmware-SmartMF-Sensormodul-RP2040 rp2040-tp
     if (!$?) { exit 1 }
+
+    # build firmware productive RP2040 sensormodule
+    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_UP1_PM_HF firmware-OpenKNX-UP1-PM-HF rp2040-tp
+    if (!$?) { exit 1 }
+
+    # build firmware for 1TE-RP2040-SmartMF
+    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_SMARTMF_1TE_REG firmware-SmartMF-1TE-REG rp2040-tp
+    if (!$?) { exit 1 }
+
 
 } elseif ($releaseIndication -eq "Release") {
     # # build firmware for RP2040 RoomControl breakout board
@@ -111,16 +127,16 @@ if ($releaseIndication -eq "Release-Debug") {
     lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_SMARTMF_SENSORMODUL firmware-SmartMF-Sensormodul-RP2040 rp2040-tp
     if (!$?) { exit 1 }
 
-    # # build firmware for SmartMF-RealPresence (old version)
-    # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_RealPresence firmware-RealPresence rp2040-tp
+    # # build firmware for SmartMF-RealPresence (waldemar version)
+    # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_RealPresence firmware-SmartMF-RealPresence rp2040-tp
     # if (!$?) { exit 1 }
 
     # build firmware for SmartMF-RealPresence (sisamiwe version)
     lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_BOARD_SMARTMF_RealPresence_V1_2 firmware-SmartMF-RealPresence-v1.2 rp2040-tp
     if (!$?) { exit 1 }
 
-    # build firmware for SmartMF-RealPresence-V2
-    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_SMARTMF_REALPRESENCE_V2 firmware-SmartMF-RealPresence-V2 rp2040-tp
+    # build firmware for SmartMF-RealPresence-v2
+    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_SMARTMF_REALPRESENCE_V2 firmware-SmartMF-RealPresence-v2 rp2040-tp
     if (!$?) { exit 1 }
 
     # # build firmware for REG1_BASE_IP

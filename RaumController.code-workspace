@@ -55,7 +55,19 @@
 			"path": "../OFM-UsbExchange"
 		},
 		{
+			"path": "../OFM-Network"
+		},
+		{
 			"path": "../OGM-HardwareConfig"
+		},
+		{
+			"path": "../OFM-SmartMF"
+		},
+		{
+			"path": "../OFM-Feedback"
+		},
+		{
+			"path": "../OFM-StatusLED"
 		}
 	],
 	"settings": {

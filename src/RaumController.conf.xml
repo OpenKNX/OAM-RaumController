@@ -2,33 +2,37 @@
 <?xml-model href="../../Organization/knxprod-support/knx_project_20/knx-editor.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <KNX xmlns:op="http://github.com/OpenKNX/OpenKNXproducer" xmlns="http://knx.org/xml/project/20" >
 
-  <op:config name="%ROOM_ApplicationVersion%" value="5.1.15" />
-  <op:config name="%ROOM_ReplacesVersions%" value="5.0 4.15 4.14 4.13 4.12 4.11 4.10 4.9 4.8 4.7 4.6 4.5 4.4 4.3 4.2 4.1 4.0" />
+  <op:config name="%ROOM_ApplicationVersion%" value="5.2.2" />
+  <op:config name="%ROOM_ReplacesVersions%" value="5.1 5.0 4.15 4.14 4.13 4.12 4.11 4.10 4.9 4.8 4.7 4.6 4.5 4.4 4.3 4.2 4.1 4.0" />
   
-  <op:config name="%UCT_VerifyVersion%" value="0.4" />
-  <op:config name="%SENS_VerifyVersion%" value="4.10" />
-  <op:config name="%WIRE_VerifyVersion%" value="2.1" />
+  <op:config name="%UCT_VerifyVersion%" value="0.5" />
+  <op:config name="%SENS_VerifyVersion%" value="4.11" />
+  <op:config name="%WIRE_VerifyVersion%" value="2.2" />
   <op:config name="%PM_VerifyVersion%" value="3.9" />
-  <op:config name="%LOG_VerifyVersion%" value="3.7" />
-  <op:config name="%BASE_VerifyVersion%" value="1.5" />
+  <op:config name="%LOG_VerifyVersion%" value="4.0" />
+  <op:config name="%BASE_VerifyVersion%" value="1.7" />
   <op:config name="%BTN_VerifyVersion%" value="0.5" />
   <op:config name="%BI_VerifyVersion%" value="0.2" />
   <op:config name="%ADC_VerifyVersion%" value="0.1" />
   <op:config name="%MTR_VerifyVersion%" value="0.5" />
-  <op:config name="%DFA_VerifyVersion%" value="0.6" />
+  <op:config name="%DFA_VerifyVersion%" value="0.7" />
   <op:config name="%SHC_VerifyVersion%" value="0.4" />
-  <op:config name="%FCB_VerifyVersion%" value="0.6" />
+  <op:config name="%FCB_VerifyVersion%" value="0.9" />
   <op:config name="%NET_VerifyVersion%" value="0.5" />
+  <op:config name="%BUZZ_VerifyVersion%" value="0.1" />
+  <op:config name="%SLED_VerifyVersion%" value="0.2" />
 
   <op:config name="%BASE_ManualSave%" value="3" />
   <op:config name="%BASE_ShowSyncModulesButton%" value="1" />
-  <op:config name="%LOG_EnableHardware%" value="1" />
-  <op:config name="%LOG_LedAccess%" value="ReadWrite" />
-  <op:config name="%LOG_LedDefault%" value="0" />
-  <op:config name="%LOG_BuzzerAccess%" value="ReadWrite" />
-  <op:config name="%LOG_BuzzerDefault%" value="0" />
   <op:config name="%LOG_EnableSave%" value="1" />
-  
+  <op:config name="%BUZZ_BuzzerFreqQuiet%" value="1800" />  
+  <op:config name="%BUZZ_BuzzerFreqNormal%" value="3200" /> 
+  <op:config name="%BUZZ_BuzzerFreqLoud%" value="2400" />   
+  <op:config name="%BUZZ_BuzzerFreqMin%" value="1500" />    
+  <op:config name="%BUZZ_BuzzerFreqMax%" value="6000" />    
+  <op:config name="%BUZZ_BuzzerDurationInt%" value="1" />   
+
+
   <op:config name="%LOG_NumChannels%" value="99" />
 
   <op:config name="%WIRE_NumChannelsDefault%" value="3" />
@@ -40,10 +44,22 @@
   <op:config name="%MTR_NumChannelsDefault%" value="2" />
   <op:config name="%SHC_NumChannelsDefault%" value="0" />
 
+  <op:config name="%SLEDdefaultName1%" value="Präsenz/Bewegung" />
+  <op:config name="%SLEDdefaultMode1%" value="1" />
+  <op:config name="%SLEDdefaultFunc1%" value="102" />
+  <op:config name="%SLEDdefaultType1%" value="1" />
+
+  <op:config name="%SLEDdefaultName2%" value="Bewegung" />
+  <op:config name="%SLEDdefaultMode2%" value="1" />
+  <op:config name="%SLEDdefaultFunc2%" value="101" />
+  <op:config name="%SLEDdefaultType2%" value="1" />
+
   <!-- <op:nowarn id="1" regex="WIRE_VerifyVersion" /> -->
   <op:nowarn id="3" regex="PM_getCalibrationData" />
   <op:nowarn id="3" regex="PM_setCalibrationData" />
   <op:nowarn id="3" regex="PM_processFunction" />
+
+  
 
 </KNX>
 <!-- this is an example for a config file, in productive use -->

@@ -125,7 +125,7 @@
 
   <!-- 
   1 KO / Channel
-  => 4*1=4 KOs (max 10 reserved)
+  => 4*1=4 KOs
   => [1330,1334[
   -->
   <op:define prefix="ADC"
@@ -136,6 +136,33 @@
     ModuleType="25">
     <op:verify File="../lib/OFM-ADCInput/library.json" ModuleVersion="%ADC_VerifyVersion%" />
   </op:define>
+
+  <!-- 
+  6 KOs 
+  => 6 KOs
+  => [1334,1340[
+  -->
+  <op:define prefix="BUZZ"
+    share="../lib/OFM-Feedback/src/Feedback.share.xml"
+    KoSingleOffset="1334"
+    ModuleType="27">
+    <op:verify File="../lib/OFM-Feedback/library.json" ModuleVersion="%BUZZ_VerifyVersion%" />
+  </op:define>
+
+  <!-- 
+  5 KOs / Channel 
+  => 2*5=10 KOs
+  => [1340,1350[
+  -->
+  <op:define prefix="SLED"
+    share="../lib/OFM-StatusLED/src/StatusLED.share.xml"
+    template="../lib/OFM-StatusLED/src/StatusLED.templ.xml"
+    NumChannels="2"
+    KoOffset="1340"
+    ModuleType="28">
+    <op:verify File="../lib/OFM-StatusLED/library.json" ModuleVersion="%SLED_VerifyVersion%" />
+  </op:define>
+
 
   <!-- 
   4 KOs / Channel

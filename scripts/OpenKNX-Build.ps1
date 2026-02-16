@@ -2,6 +2,9 @@ param (
   [Parameter(Mandatory = $false, HelpMessage="Initiate debug build, -DebugBuild should be first odr last parameter")]
   [switch]$DebugBuild,
 
+  [Parameter(Mandatory = $false, HelpMessage="-Monitor starts pio monitor after build, env useCurrent is supported")]
+  [switch]$Monitor,
+
   [Parameter(Mandatory = $true)]
   [ValidateNotNullOrEmpty()]
   [string]$env,
@@ -65,13 +68,20 @@ try {
 
 if ($env -eq "useCurrent") { $env = $currentEnv }
 
+if ($Monitor) {
+    Write-Host "Starte den Monitor..."
+    ~/.platformio/penv/Scripts/pio.exe device monitor --environment $env
+    exit 0
+}
+
 if ($DebugBuild -or $target -eq "uploadOnly") {
     if ($target -ne "uploadOnly") {
         lib/OGM-Common/scripts/build/OpenKNX-Build.ps1 -DebugBuild -env $env
+        if (!$?) { exit 1 }
     }
     if ($target -eq "upload" -or $target -eq "uploadOnly") {
         $success = $true
-        $monitorStarted = StopPioMontor
+        StopPioMontor | Out-Null
         if ($currentProcessor -eq "rp2040") {
             $device = $(Get-WmiObject Win32_LogicalDisk | Where-Object { $_.VolumeName -match "RPI-RP2|RP2350" }) | Select-Object -First 1
 
@@ -139,10 +149,10 @@ if ($DebugBuild -or $target -eq "uploadOnly") {
         if (-not $success) {
             Write-Host "Firmware-Upload abgebrochen, eventuell Moitor-Modus beenden!" -ForegroundColor Red
         }
-        if ($monitorStarted) {
-            Write-Host "Starte den Monitor neu..."
-            ~/.platformio/penv/Scripts/pio.exe device monitor --environment $env
-        }
+        # if ($monitorStarted) {
+            # Write-Host "Starte den Monitor neu..."
+            # ~/.platformio/penv/Scripts/pio.exe device monitor --environment $env
+        # }
     }
 }
 else {
