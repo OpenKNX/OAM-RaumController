@@ -18,4 +18,4 @@ a64279e main lib/OFM-SmartMF https://github.com/OpenKNX/OFM-SmartMF
 06ebdcb v1 lib/OFM-VirtualButton https://github.com/OpenKNX/OFM-VirtualButton.git
 193e462 v1 lib/OGM-Common https://github.com/OpenKNX/OGM-Common
 d4f8a07 v1 lib/OGM-HardwareConfig https://github.com/OpenKNX/OGM-HardwareConfig
-9f90b6a v1 lib/OGM-SensorDevices https://github.com/OpenKNX/OGM-SensorDevices.git
+369412c v1 lib/OGM-SensorDevices https://github.com/OpenKNX/OGM-SensorDevices.git
