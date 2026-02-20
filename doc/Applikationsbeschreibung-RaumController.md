@@ -113,6 +113,17 @@ Auch Analogeingänge werden unterstützt, z.B. vom Sensormodul v4.2 von SmartMF.
 
 Die Funktionen der Analogeingänge sind unter [Applikationsbeschreibung-ADC-Eingang](https://github.com/OpenKNX/OFM-ADCInput/blob/main/doc/Applikationsbeschreibung-ADC-Eingang.md) beschrieben.
 
+### **Buzzer / Vibration**
+
+Der Buzzer vom Sensormodul wird jetzt durch ein eigenes Modul unterstützt.
+
+Die Funktionen vom Modul Buzzer / Vibration sind unter [Applikationsbeschreibung-Feedback](https://github.com/OpenKNX/OFM-Feedback/blob/v1/doc/Applikationsbeschreibung-Feedback.md) beschrieben.
+
+### **Status LEDs**
+
+Wenn das Sensormodul mit einer Hardware verwendet wird, die LEDs hat, die durch den Benutzer steuerbar sind, kann dies mit dem Status-LED-Modul erfolgen.
+Dessen Funktion ist in der [Applikationsbeschreibung-StatusLED](https://github.com/OpenKNX/OFM-StatusLED/blob/v1/doc/Applikationsbeschreibung-StatusLED.md) beschrieben.
+
 ### **Zähler**
 
 In einem Raum will man auch Verbrauchsdaten erfassen und Zählen, um daraus Regeln für Automatismen abzuleiten. Das Zählermodul ist in der [Applikationsbeschreibung-Zaehler](https://github.com/OpenKNX/OFM-Meter/blob/v1/doc/Applikationsbeschreibung-Zaehler.md) beschrieben.
@@ -130,6 +141,86 @@ Die Funktionen des Logikmoduls sind unter [Applikationsbeschreibung-Logik](https
 ### **Funktionsblöcke**
 
 Kompliziertere logische Funktionen, die nur sehr aufwändig mit dem Logikmodul zu realisieren wären, sind als Funktionsblöcke verfügbar. Das Modul ist in der [Applikationsbeschreibung-Function](https://github.com/OpenKNX/OFM-FunctionBlocks/blob/v1/doc/Applikationsbeschreibung-FunctionBlocks.md) beschrieben.
+
+
+## **Hinweise zu Hardware-Varianten**
+
+Der RaumController ist eine generische Applikation, die auf unterschiedlicher Hardware läuft. Viele der enthaltenen Module sind unabhängig von jeglicher Hardware nutzbar, dazu gehören 
+
+* Konfigurationstransfer
+* Präsenzmelder (wenn er als VPM verwendet wird)
+* Jalousiesteuerung
+* Virtuelle Taster
+* Zähler
+* Zustandsautomaten
+* Logiken
+* Funktionsblöcke
+
+Die hardwareabhängigen Module erfordern Einstellungen, die passend zu der gegebenen Hardware sind. Da es für Benutzer häufig nicht einfach zu erkennen ist, welche Einstellungen korrekt sind, werden in den folgenden Kapiteln die Einstellungen für die unterstützte Hardware vorgestellt.
+
+Falls eine bestimmte Hardware nicht aufgeführt ist, bedeutet das, dass es keine speziellen Einstellungen für diese Hardware gibt. Die Module, die durch eine bestimmte Hardware nicht unterstützt werden, kann man durch den [Abgleich mit dem Gerät](https://github.com/OpenKNX/OGM-Common/blob/v1/doc/Applikationsbeschreibung-Common.md#abgleich-mit-dem-ger%C3%A4t) deaktivieren.
+
+Der verwendete Name ist derjenige, der auf der Gerätekonsole für das Gerät ausgegeben wird, der Name in Klammern ist die eindeutige DEVICE_ID.
+
+### OpenKNX REG1 Basismodul (REG1-Base)
+
+#### Sensoren
+
+Hier können Einstellungen vorgenommen werden, wenn ein I²C-Sensor am Erweiterungsstecker (der grüne oben) angeschlossen wurde.
+
+### OpenKNX REG1 Basismodul V0 (REG1-Base-V0) 
+
+#### Sensoren
+
+Hier können Einstellungen vorgenommen werden, wenn ein I²C-Sensor am Erweiterungsstecker (der grüne oben) angeschlossen wurde.
+
+### OpenKNX UP1 8xSensor (UP1-SEN-8x)
+
+#### Sensoren 
+
+Hier können Einstellungen vorgenommen werden, wenn ein I²C-Sensor am Anschluss E angeschlossen wurde.
+
+#### Binäreingänge
+
+Es sind 4 Binäreingänge verfügbar (Sichtbare Kanäle: 4):
+Binäreingang 1 ist der Anschluss C1.
+Binäreingang 2 ist der Anschluss C2.
+Binäreingang 3 ist der Anschluss D1.
+Binäreingang 2 ist der Anschluss D2.
+
+#### Virtuelle Taster
+
+Über die 4 Binäreingänge können bis zu 4 Taster abgefragt werden, wobei jeder Tasterkanal einem beliebigen Binäreingang zugeordnet werden kann.
+
+### OpenKNX UP1 Präsenzmelder+ (UP1-PM-HF)
+
+#### Sensoren 
+
+Hier können Einstellungen vorgenommen werden, wenn ein I²C-Sensor am Anschluss J30 angeschlossen wurde oder ein Lichtsensor (VEML7700) oder ein Entfernungssensor (TOF400) verbaut wurde.
+
+#### Präsenzmelder
+
+Hier können Einstellungen vorgenommen werden, wenn ein Präsenzsensor (HLK2420) oder ein Lichtsensor (VEML7700) verbaut wurde.
+
+#### Binäreingänge
+
+
+### OpenKNX UP1 Taster (UP1-TAS-4x)
+
+### OpenKNX REG1 Basismodul LAN+TP (REG1-LAN-TP-Base)
+
+### OpenKNX REG1 Basismodul LAN (REG1-LAN-Base)
+
+### Smart-MF 1TE REG (SMARTMF-1Wire-1CH)
+
+### Smart-MF Sensormodul V4 (SMARTMF-SEN-V4)
+
+### Smart-MF RealPresence 2.0 (SMARTMF-RP-V2)
+
+### Alle Presenzmelder von ABSmartHouse
+
+
+
 
 
 ## **Update vom Sensormodul 4.x**

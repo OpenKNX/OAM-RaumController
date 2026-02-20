@@ -4,7 +4,7 @@ f6111d3 v1 lib/knx https://github.com/OpenKNX/knx
 7b628ef v1 lib/OFM-BinaryInput https://github.com/OpenKNX/OFM-BinaryInput.git
 26cc3d8 fix/log-module-patch lib/OFM-ConfigTransfer https://github.com/OpenKNX/OFM-ConfigTransfer
 188c9fc v1dev lib/OFM-DFA https://github.com/OpenKNX/OFM-DFA
-3a10cd1 v1 lib/OFM-Feedback https://github.com/OpenKNX/OFM-Feedback.git
+3a10cd1 v1dev lib/OFM-Feedback https://github.com/OpenKNX/OFM-Feedback.git
 178f186 v1 lib/OFM-FileTransferModule https://github.com/OpenKNX/OFM-FileTransferModule.git
 dcbe08e v1 lib/OFM-FunctionBlocks https://github.com/OpenKNX/OFM-FunctionBlocks.git
 1fccca5 v1 lib/OFM-LogicModule https://github.com/OpenKNX/OFM-LogicModule
@@ -18,6 +18,6 @@ c75cd34 v1 lib/OFM-ShutterControllerModule https://github.com/OpenKNX/OFM-Shutte
 c600c3c v1dev lib/OFM-StatusLED https://github.com/OpenKNX/OFM-StatusLED
 55119fc v1 lib/OFM-UsbExchange https://github.com/OpenKNX/OFM-UsbExchange
 034977c v1 lib/OFM-VirtualButton https://github.com/OpenKNX/OFM-VirtualButton.git
-221dc7a v1dev lib/OGM-Common https://github.com/OpenKNX/OGM-Common
+120b73a v1 lib/OGM-Common https://github.com/OpenKNX/OGM-Common
 8907cff v1dev lib/OGM-HardwareConfig https://github.com/OpenKNX/OGM-HardwareConfig
 369412c v1 lib/OGM-SensorDevices https://github.com/OpenKNX/OGM-SensorDevices.git

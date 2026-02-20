@@ -111,13 +111,13 @@
 
   <!-- 
   1 KO / Channel
-  => 6*1=6 KOs (max 10 reserved)
-  => [1320,1326[
+  => 10*1=10 KOs (max 10 reserved)
+  => [1320,1329[
   -->
   <op:define prefix="BI"
     share="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml"
     template="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml"
-    NumChannels="6"
+    NumChannels="10"
     KoOffset="1320"
     ModuleType="24">
     <op:verify File="../lib/OFM-BinaryInput/library.json" ModuleVersion="%BI_VerifyVersion%" />

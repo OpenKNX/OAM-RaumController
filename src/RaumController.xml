@@ -12,8 +12,8 @@
   
   <op:ETS OpenKnxId="0xA0"
     ApplicationNumber="0x11"
-    ApplicationVersion="2.3.0"
-    ReplacesVersions="2.2 2.1 2.0 1.15 1.14 1.13 1.12 1.11 1.10 1.9 1.8 1.7 1.6 1.5 1.4 1.3 1.2 1.1 1.0 0.15 0.14 0.13 0.12 0.11 0.10 0.9 0.8 0.7 0.6 0.5 0.4 0.3"
+    ApplicationVersion="2.7.0"
+    ReplacesVersions="2.6 2.5 2.4 2.3 2.2 2.1 2.0 1.15 1.14 1.13 1.12 1.11 1.10 1.9 1.8 1.7 1.6 1.5 1.4 1.3 1.2 1.1 1.0 0.15 0.14 0.13 0.12 0.11 0.10 0.9 0.8 0.7 0.6 0.5 0.4 0.3"
     ApplicationRevision="0"
     ProductName="RaumController"
     BuildSuffix="-Dev"
@@ -26,7 +26,8 @@
   <op:define prefix="BUTTONLINK"
              share="RaumController-VirtualButton.link.xml"
              noConfigTransfer="true"
-             ModuleType="22" >
+             isSubmoduleOf="BTN"
+             ModuleType="50" >
   </op:define>
 
   <op:define prefix="BASE"
@@ -107,7 +108,7 @@
   <op:define prefix="BTN"
     share="../lib/OFM-VirtualButton/src/VirtualButton.share.xml"
     template="../lib/OFM-VirtualButton/src/VirtualButton.templ.xml"
-    NumChannels="5"
+    NumChannels="10"
     KoOffset="610"
     ModuleType="50">
     <op:verify File="../lib/OFM-VirtualButton/library.json" ModuleVersion="%BTN_VerifyVersion%" />
@@ -115,13 +116,13 @@
 
   <!-- 
   1 KO / Channel
-  => 6*1=6 KOs (max 10 reserved)
-  => [1320,1326[
+  => 10*1=10 KOs (max 10 reserved)
+  => [1320,1329[
   -->
   <op:define prefix="BI"
     share="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml"
     template="../lib/OFM-BinaryInput/src/BinaryInputChannel.templ.xml"
-    NumChannels="6"
+    NumChannels="10"
     KoOffset="1320"
     ModuleType="24">
     <op:verify File="../lib/OFM-BinaryInput/library.json" ModuleVersion="%BI_VerifyVersion%" />
@@ -155,13 +156,13 @@
 
   <!-- 
   5 KOs / Channel 
-  => 2*5=10 KOs
-  => [1340,1350[
+  => 4*5=20 KOs
+  => [1340,1360[
   -->
   <op:define prefix="SLED"
     share="../lib/OFM-StatusLED/src/StatusLED.share.xml"
     template="../lib/OFM-StatusLED/src/StatusLED.templ.xml"
-    NumChannels="2"
+    NumChannels="4"
     KoOffset="1340"
     ModuleType="28">
     <op:verify File="../lib/OFM-StatusLED/library.json" ModuleVersion="%SLED_VerifyVersion%" />
