@@ -12,8 +12,8 @@
   
   <op:ETS OpenKnxId="0xA0"
     ApplicationNumber="0x11"
-    ApplicationVersion="2.7.0"
-    ReplacesVersions="2.6 2.5 2.4 2.3 2.2 2.1 2.0 1.15 1.14 1.13 1.12 1.11 1.10 1.9 1.8 1.7 1.6 1.5 1.4 1.3 1.2 1.1 1.0 0.15 0.14 0.13 0.12 0.11 0.10 0.9 0.8 0.7 0.6 0.5 0.4 0.3"
+    ApplicationVersion="3.1.0"
+    ReplacesVersions="2.15 2.14 2.13 2.12 2.11 2.10 2.9 2.8 2.7 2.6 2.5 2.4 2.3 2.2 2.1 2.0 1.15 1.14 1.13 1.12 1.11 1.10 1.9 1.8 1.7 1.6 1.5 1.4 1.3 1.2 1.1 1.0 0.15 0.14 0.13 0.12 0.11 0.10 0.9 0.8 0.7 0.6 0.5 0.4 0.3"
     ApplicationRevision="0"
     ProductName="RaumController"
     BuildSuffix="-Dev"
@@ -64,7 +64,7 @@
   <op:define prefix="WIRE" 
              share="../lib/OFM-OneWireModule/src/WireGateway.share.xml"
              template="../lib/OFM-OneWireModule/src/WireGateway.templ.xml"
-             NumChannels="10" 
+             NumChannels="3" 
              KoSingleOffset="30" 
              KoOffset="90"  
              ModuleType="20" >
@@ -79,7 +79,7 @@
   <op:define prefix="PM"
     share="../lib/OFM-PresenceModule/src/PMmodul.share.xml"
     template="../lib/OFM-PresenceModule/src/PMmodul.templ.xml"
-    NumChannels="5"
+    NumChannels="3"
     KoOffset="120"
     ModuleType="30">
     <op:verify File="../lib/OFM-PresenceModule/library.json" ModuleVersion="%PM_VerifyVersion%" />
@@ -205,7 +205,7 @@
   <op:define prefix="LOG"
     share="../lib/OFM-LogicModule/src/Logikmodul.share.xml"
     template="../lib/OFM-LogicModule/src/Logikmodul.templ.xml"
-    NumChannels="99"
+    NumChannels="20"
     KoOffset="920"
     ModuleType="10">
     <op:verify File="../lib/OFM-LogicModule/library.json" ModuleVersion="%LOG_VerifyVersion%" />

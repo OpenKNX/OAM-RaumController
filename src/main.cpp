@@ -58,6 +58,24 @@ void setup()
 #endif
 
     openknx.init();
+
+    if (!knx.configured())
+    {
+#ifdef DEVICE_UP1_PM_HF
+        OpenKNX::Led::Base *lUnconfiguredLed = openknx.leds.getLed(OpenKNX::Led::LED_TYPE_USER);
+        openknx.ledFunctions.assignLed2Function(lUnconfiguredLed, OPENKNX_LEDFUNC_BASE_STATE );
+        lUnconfiguredLed->brightness(10);
+#endif
+#ifdef DEVICE_AB_PRE_BASE
+        OpenKNX::Led::Base *lUnconfiguredLed = openknx.leds.getLed(OpenKNX::Led::LED_TYPE_USER+1);
+        openknx.ledFunctions.assignLed2Function(lUnconfiguredLed, OPENKNX_LEDFUNC_BASE_STATE );
+#endif
+#ifdef DEVICE_UP1_TAS_4X
+        OpenKNX::Led::Base *lUnconfiguredLed = openknx.leds.getLed(OpenKNX::Led::LED_TYPE_USER);
+        openknx.ledFunctions.assignLed2Function(lUnconfiguredLed, OPENKNX_LEDFUNC_BASE_STATE ); 
+#endif
+    }
+    
     openknx.addModule(1, openknxLogic);
 #ifdef WIREMODULE
     openknx.addModule(2, openknxWireGateway);
@@ -113,7 +131,6 @@ openknx.addModule(5, openknxFileTransferModule);
     openknx.unsupportedEtsModule(ETS_ModuleId_BUZZ);
 #endif
     openknx.addModule(18, openknxStatusLEDModule);
-
 
 openknx.setup();
 }

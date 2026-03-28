@@ -7,6 +7,12 @@
     #ifdef DEVICE_REG1_BASE
         #define I2C_SDA_PIN OKNXHW_REG1_SENSOR_SDA_TX_PIN
         #define I2C_SCL_PIN OKNXHW_REG1_SENSOR_SCL_RX_PIN
+        // the following has side effects with common button handling
+        // #define FUNC2_BUTTON_PIN REG1_FRONT_PIN4
+        // #define FUNC3_BUTTON_PIN REG1_FRONT_PIN7
+        #define OPENKNX_BI_GPIO_PINS REG1_FRONT_PIN3, REG1_FRONT_PIN4, REG1_FRONT_PIN7
+        #define OPENKNX_BI_GPIO_COUNT 3
+        #define OPENKNX_BI_ONLEVEL LOW
     #endif
 
     #ifdef DEVICE_REG1_BASE_V0

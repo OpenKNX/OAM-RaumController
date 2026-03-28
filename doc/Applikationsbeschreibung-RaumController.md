@@ -17,6 +17,28 @@ Alles ohne zentralen Server.
 ## **Änderungshistorie**
 
 Im folgenden werden Änderungen an der Applikation erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren. Dabei wird primär auf Änderungen in den beteiligten Modulen hingewiesen. Detailänderungen können dann in den jeweiligen Applikationsbeschreibungen nachgelesen werden.
+26.03.2026: Firmware 5.4.0, Application 5.4:
+
+- NEU: Status LEDs in der Version 0.2 zugefügt
+- NEU: Buzzer/Vibration in der Version 0.1 zugefügt
+- Binäreingänge auf die Version 0.3 und Anzahl auf 10 erhöht
+- Konfigurationstransfer auf die Version 0.5 erhöht
+- Funktionsblöcke auf die Version 0.10 erhöht
+- Logikmodul auf die Version 4.1 erhöht
+- 1-Wire auf die Version 2.2 erhöht
+- Sensoren auf die Version 4.11 erhöht
+- Virtuelle Taster auf die Version 0.6 erhöht
+- Common auf die Version 1.7 erhöht
+
+- BREAKING: Die Liste der ausgeblendeten Module wird bei einem Update zurückgesetzt
+- BREAKING: Falls man bisher einen Geräte-Buzzer über das Logikmodul gesteuert hat, ist eine manuelle Nachkonfiguration notwendig, da der Buzzer jetzt über das Modul Buzzer/Vibration gesteuert wird 
+- BREAKING: Falls man bisher eine Gräte-LED über das Logikmodul gesteuert hat, ist eine manuelle Nachkonfiguration notwendig, da LEDs jetzt über das Modul Status LEDs 
+- BREAKING: KO 18 entfällt. Wenn dieses KO mit einer GA verbunden ist, muss die GA vor dem ETS-Update getrennt werden.
+- BREAKING: KO 19 entfällt. Wenn dieses KO mit einer GA verbunden ist, muss die GA vor dem ETS-Update getrennt werden.
+
+Auch wenn es viele BREAKING-Changes sind, sie betreffen selten verwendete Objekte oder haben keine gravierenden Auswirkungen.
+
+Die jeweiligen Änderungen der Module kann man jeweils in deren Applikationen nachlesen.
 
 19.01.2026: Firmware 5.1.13, Appliation 5.1:
 
@@ -204,24 +226,83 @@ Hier können Einstellungen vorgenommen werden, wenn ein Präsenzsensor (HLK2420)
 
 #### Binäreingänge
 
+#### Status LED
+
+Hier ist nur eine LED einzustellen als Präsenz+Bewegungs-LED. Es ist eine RGB-LED verbaut, die auch extern über KO angesteuert werden kann.
 
 ### OpenKNX UP1 Taster (UP1-TAS-4x)
 
-### OpenKNX REG1 Basismodul LAN+TP (REG1-LAN-TP-Base)
+Dieser Taster kann über eine Erweiterung auch als 8-Fach-Taster (4 Wippen) betrieben werden. 
 
-### OpenKNX REG1 Basismodul LAN (REG1-LAN-Base)
+#### Binäreingänge
+
+Die Binäreingägne sind folgendermaßen Vorbelegt:
+
+* BI A: Taste links oben
+* BI B: Taste links unten
+* BI C: Taste rechts oben
+* BI D: Taste rechts unten
+* BI E: Taste links oben (Erweiterung)
+* BI F: Taste links unten (Erweiterung)
+* BI G: Taste rechts oben (Erweiterung)
+* BI H: Taste rechts unten (Erweiterung)
+* BI I: Anschluss I0
+* BI J: Anschluss I1
+
+#### Virtuelle Taster
+
+Die Tasten können natürlich frei belegt werden. Üblicherweise verwendet man aber 2 oder - mit Erweiterung 4 Wippen. Dabei nutzt
+
+* Wippe links: Binäreingang A und B
+* Wippe rechts: Binäreingang C und D
+* Wippe links (Erweiterung): Binäreingang E und F
+* Wippe rechts (Erweiterung): Binäreingang G und H
+
+#### Status LED
+
+Hier ist nur eine LED einzustellen als Präsenz+Bewegungs-LED. Es ist eine RGB-LED verbaut, die auch extern über KO angesteuert werden kann.
+
+#### Sensoren 
+
+Hier können Einstellungen vorgenommen werden, wenn ein I²C-Sensor angeschlossen wurde, üblicherweise ist das ein SHT3x, der Temperatur und Luftfeuchte messen kann.
+
 
 ### Smart-MF 1TE REG (SMARTMF-1Wire-1CH)
 
+wird nachgereicht
+
 ### Smart-MF Sensormodul V4 (SMARTMF-SEN-V4)
+
+wird nachgereicht
 
 ### Smart-MF RealPresence 2.0 (SMARTMF-RP-V2)
 
+wird nachgereicht
+
 ### Alle Presenzmelder von ABSmartHouse
 
+#### Binäreingänge
 
+Die Binäreingägne sind folgendermaßen Vorbelegt:
 
+ * BI A: Anschluss A
+ * BI B: Anschluss B
 
+#### Status LED
+
+Man kann 2 LED einstellen, die grüne LED ist LED 1 und wird für die Anzeige von Präsenz genutzt, die gelbe LED ist LED 2 und zeigt Bewegung an.
+
+#### Sensoren 
+
+Hier können Einstellungen vorgenommen werden, wenn I²C-Sensoren angeschlossen wurden. 
+
+Der Multisensor ist für einen BME680 oder BME280, einen SCD40 oder SCD41 und einen VEML7700 vorbereitet.
+Die Wandsensoren können mit einem BME680 und einen VEML7700 bestückt werden.
+Der MR16-Sensor unterstützt nur einen VEML7700.
+
+#### Präsenzmelder
+
+Hier können Einstellungen vorgenommen werden, wenn ein Präsenzsensor (HLK2420) oder ein Lichtsensor (VEML7700) verbaut wurde.
 
 ## **Update vom Sensormodul 4.x**
 
