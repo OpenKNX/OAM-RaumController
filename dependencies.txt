@@ -11,8 +11,8 @@ d5b89ef v1dev lib/OFM-FunctionBlocks https://github.com/OpenKNX/OFM-FunctionBloc
 18e88de v1dev lib/OFM-Meter https://github.com/OpenKNX/OFM-Meter.git
 3052857 v1 lib/OFM-Network https://github.com/OpenKNX/OFM-Network
 d7607e3 v1dev lib/OFM-OneWireModule https://github.com/OpenKNX/OFM-OneWireModule.git
-08275e5 v1dev lib/OFM-PresenceModule https://github.com/OpenKNX/OFM-PresenceModule
-a133b90 v1dev lib/OFM-SensorModule https://github.com/OpenKNX/OFM-SensorModule
+8ca3048 v1dev lib/OFM-PresenceModule https://github.com/OpenKNX/OFM-PresenceModule
+75c7344 v1dev lib/OFM-SensorModule https://github.com/OpenKNX/OFM-SensorModule
 4605831 fix/parameter-overlap lib/OFM-ShutterControllerModule https://github.com/OpenKNX/OFM-ShutterControllerModule
 0da890c v1 lib/OFM-SmartMF https://github.com/OpenKNX/OFM-SmartMF
 b41ed6b v1dev lib/OFM-StatusLED https://github.com/OpenKNX/OFM-StatusLED
