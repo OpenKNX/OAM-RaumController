@@ -1,0 +1,28 @@
+# Check OAM
+# Copyright (C) 2026 Cornelius Koepp (OpenKNX); For Usage in OpenKNX-Project only
+
+on: [push]
+
+jobs:
+  check:
+    name: Check '${{ matrix.target }}' in '${{ matrix.oam }}'
+    strategy:
+      fail-fast: false
+      matrix:
+
+        # [BUILD]: all build targets
+        target:
+          - Release
+          - ""
+
+        # [REF]: same commit and (newest on) branch
+        restore_branch:
+          - false
+          - true
+
+    uses: openknx/actions/.github/workflows/openknx-oam-check.yml@v0
+    with:
+      # oam and oam_ref given by this repo
+      restore_branch: ${{ matrix.restore_branch }}
+      target: ${{ matrix.target }}
+      KNXPROD_PREFIX: RaumController
