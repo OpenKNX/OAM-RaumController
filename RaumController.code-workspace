@@ -4,7 +4,37 @@
 			"path": "."
 		},
 		{
-			"path": "../OFM-SensorModule"
+			"path": "../knx"
+		},
+		{
+			"path": "../OFM-ADCInput"
+		},
+		{
+			"path": "../OFM-BinaryInput"
+		},
+		{
+			"path": "../OFM-ConfigTransfer"
+		},
+		{
+			"path": "../OFM-DFA"
+		},
+		{
+			"path": "../OFM-Feedback"
+		},
+		{
+			"path": "../OFM-FileTransferModule"
+		},
+		{
+			"path": "../OFM-FunctionBlocks"
+		},
+		{
+			"path": "../OFM-LogicModule"
+		},
+		{
+			"path": "../OFM-Meter"
+		},
+		{
+			"path": "../OFM-Network"
 		},
 		{
 			"path": "../OFM-OneWireModule"
@@ -13,49 +43,31 @@
 			"path": "../OFM-PresenceModule"
 		},
 		{
+			"path": "../OFM-SensorModule"
+		},
+		{
 			"path": "../OFM-ShutterControllerModule"
 		},
 		{
-			"path": "../OFM-VirtualButton"
+			"path": "../OFM-SmartMF"
 		},
 		{
-			"path": "../OFM-BinaryInput"
-		},
-		{
-			"path": "../OFM-ADCInput"
-		},
-		{
-			"path": "../OFM-Meter"
-		},
-		{
-			"path": "../OFM-DFA"
-		},
-		{
-			"path": "../OFM-LogicModule"
-		},
-		{
-			"path": "../OFM-FunctionBlocks"
-		},
-		{
-			"path": "../OFM-FileTransferModule"
-		},
-		{
-			"path": "../OGM-SensorDevices"
-		},
-		{
-			"path": "../OGM-Common"
-		},
-		{
-			"path": "../knx"
-		},
-		{
-			"path": "../OFM-ConfigTransfer"
+			"path": "../OFM-StatusLED"
 		},
 		{
 			"path": "../OFM-UsbExchange"
 		},
 		{
+			"path": "../OFM-VirtualButton"
+		},
+		{
+			"path": "../OGM-Common"
+		},
+		{
 			"path": "../OGM-HardwareConfig"
+		},
+		{
+			"path": "../OGM-SensorDevices"
 		}
 	],
 	"settings": {

@@ -18,6 +18,49 @@ Alles ohne zentralen Server.
 
 Im folgenden werden Änderungen an der Applikation erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren. Dabei wird primär auf Änderungen in den beteiligten Modulen hingewiesen. Detailänderungen können dann in den jeweiligen Applikationsbeschreibungen nachgelesen werden.
 
+20.06.2026: Firmware 5.5.0, Application 5.5:
+
+Hier werden nur wesentliche Neuerungen aufgelistet: Die jeweiligen Detail-Änderungen der Module kann man jeweils in deren Applikationen nachlesen.
+
+- NEU: Beim Logikmodul können jetzt einzelne Kanäle gesperrt werden.
+- NEU: Beim Präsenzmelder kann der PIR-Sensor alleine verwendet werden, ohne HF-Sensor.
+- NEU: Bei der Jalousiesteuerung kann man jetzt Fassaden auswählen.
+- NEU: Als Hardware wird jetzt auch der Taster für Gira Wippen unterstützt.
+
+Folgende Module wurden aktualisiert:
+
+- Netzwerk auf Version 0.6
+- Präsenzmelder auf Version 3.10
+- Jalousiesteuerung auf Version 0.8
+- Buzzer/Vibration auf Version 0.3
+- Zähler auf Version 0.6
+- Logiken auf Version 4.3
+
+Die jeweiligen Detail-Änderungen der Module kann man jeweils in deren Applikationen bzw. den zugehörigen Changelogs nachlesen.
+
+26.03.2026: Firmware 5.4.0, Application 5.4:
+
+- NEU: Status LEDs in der Version 0.2 zugefügt
+- NEU: Buzzer/Vibration in der Version 0.1 zugefügt
+- Binäreingänge auf die Version 0.3 und Anzahl auf 10 erhöht
+- Konfigurationstransfer auf die Version 0.5 erhöht
+- Funktionsblöcke auf die Version 0.10 erhöht
+- Logikmodul auf die Version 4.1 erhöht
+- 1-Wire auf die Version 2.2 erhöht
+- Sensoren auf die Version 4.11 erhöht
+- Virtuelle Taster auf die Version 0.6 erhöht
+- Common auf die Version 1.7 erhöht
+
+- BREAKING: Die Liste der ausgeblendeten Module wird bei einem Update zurückgesetzt
+- BREAKING: Falls man bisher einen Geräte-Buzzer über das Logikmodul gesteuert hat, ist eine manuelle Nachkonfiguration notwendig, da der Buzzer jetzt über das Modul Buzzer/Vibration gesteuert wird 
+- BREAKING: Falls man bisher eine Gräte-LED über das Logikmodul gesteuert hat, ist eine manuelle Nachkonfiguration notwendig, da LEDs jetzt über das Modul Status LEDs 
+- BREAKING: KO 18 entfällt. Wenn dieses KO mit einer GA verbunden ist, muss die GA vor dem ETS-Update getrennt werden.
+- BREAKING: KO 19 entfällt. Wenn dieses KO mit einer GA verbunden ist, muss die GA vor dem ETS-Update getrennt werden.
+
+Auch wenn es viele BREAKING-Changes sind, sie betreffen selten verwendete Objekte oder haben keine gravierenden Auswirkungen.
+
+Die jeweiligen Änderungen der Module kann man jeweils in deren Applikationen nachlesen.
+
 19.01.2026: Firmware 5.1.13, Appliation 5.1:
 
 - HOTFIX: Der Sensor SCD4x konnte bei einem Neustart in einen Zustand geraten, bei dem er keine Werte sendet (sporadisch häufig). In ganz seltenen Fällen konnte das dazu führen, dass kein Sensor mehr seine Werte senden konnte.
@@ -113,6 +156,17 @@ Auch Analogeingänge werden unterstützt, z.B. vom Sensormodul v4.2 von SmartMF.
 
 Die Funktionen der Analogeingänge sind unter [Applikationsbeschreibung-ADC-Eingang](https://github.com/OpenKNX/OFM-ADCInput/blob/main/doc/Applikationsbeschreibung-ADC-Eingang.md) beschrieben.
 
+### **Buzzer / Vibration**
+
+Der Buzzer vom Sensormodul wird jetzt durch ein eigenes Modul unterstützt.
+
+Die Funktionen vom Modul Buzzer / Vibration sind unter [Applikationsbeschreibung-Feedback](https://github.com/OpenKNX/OFM-Feedback/blob/v1/doc/Applikationsbeschreibung-Feedback.md) beschrieben.
+
+### **Status LEDs**
+
+Wenn das Sensormodul mit einer Hardware verwendet wird, die LEDs hat, die durch den Benutzer steuerbar sind, kann dies mit dem Status-LED-Modul erfolgen.
+Dessen Funktion ist in der [Applikationsbeschreibung-StatusLED](https://github.com/OpenKNX/OFM-StatusLED/blob/v1/doc/Applikationsbeschreibung-StatusLED.md) beschrieben.
+
 ### **Zähler**
 
 In einem Raum will man auch Verbrauchsdaten erfassen und Zählen, um daraus Regeln für Automatismen abzuleiten. Das Zählermodul ist in der [Applikationsbeschreibung-Zaehler](https://github.com/OpenKNX/OFM-Meter/blob/v1/doc/Applikationsbeschreibung-Zaehler.md) beschrieben.
@@ -131,6 +185,145 @@ Die Funktionen des Logikmoduls sind unter [Applikationsbeschreibung-Logik](https
 
 Kompliziertere logische Funktionen, die nur sehr aufwändig mit dem Logikmodul zu realisieren wären, sind als Funktionsblöcke verfügbar. Das Modul ist in der [Applikationsbeschreibung-Function](https://github.com/OpenKNX/OFM-FunctionBlocks/blob/v1/doc/Applikationsbeschreibung-FunctionBlocks.md) beschrieben.
 
+
+## **Hinweise zu Hardware-Varianten**
+
+Der RaumController ist eine generische Applikation, die auf unterschiedlicher Hardware läuft. Viele der enthaltenen Module sind unabhängig von jeglicher Hardware nutzbar, dazu gehören 
+
+* Konfigurationstransfer
+* Präsenzmelder (wenn er als VPM verwendet wird)
+* Jalousiesteuerung
+* Virtuelle Taster
+* Zähler
+* Zustandsautomaten
+* Logiken
+* Funktionsblöcke
+
+Die hardwareabhängigen Module erfordern Einstellungen, die passend zu der gegebenen Hardware sind. Da es für Benutzer häufig nicht einfach zu erkennen ist, welche Einstellungen korrekt sind, werden in den folgenden Kapiteln die Einstellungen für die unterstützte Hardware vorgestellt.
+
+Falls eine bestimmte Hardware nicht aufgeführt ist, bedeutet das, dass es keine speziellen Einstellungen für diese Hardware gibt. Die Module, die durch eine bestimmte Hardware nicht unterstützt werden, kann man durch den [Abgleich mit dem Gerät](https://github.com/OpenKNX/OGM-Common/blob/v1/doc/Applikationsbeschreibung-Common.md#abgleich-mit-dem-ger%C3%A4t) deaktivieren.
+
+Der verwendete Name ist derjenige, der auf der Gerätekonsole für das Gerät ausgegeben wird, der Name in Klammern ist die eindeutige DEVICE_ID.
+
+### OpenKNX REG1 Basismodul (REG1-Base)
+
+#### Sensoren
+
+Hier können Einstellungen vorgenommen werden, wenn ein I²C-Sensor am Erweiterungsstecker (der grüne oben) angeschlossen wurde.
+
+### OpenKNX REG1 Basismodul V0 (REG1-Base-V0) 
+
+#### Sensoren
+
+Hier können Einstellungen vorgenommen werden, wenn ein I²C-Sensor am Erweiterungsstecker (der grüne oben) angeschlossen wurde.
+
+### OpenKNX UP1 8xSensor (UP1-SEN-8x)
+
+#### Sensoren 
+
+Hier können Einstellungen vorgenommen werden, wenn ein I²C-Sensor am Anschluss E angeschlossen wurde.
+
+#### Binäreingänge
+
+Es sind 4 Binäreingänge verfügbar (Sichtbare Kanäle: 4):
+Binäreingang 1 ist der Anschluss C1.
+Binäreingang 2 ist der Anschluss C2.
+Binäreingang 3 ist der Anschluss D1.
+Binäreingang 2 ist der Anschluss D2.
+
+#### Virtuelle Taster
+
+Über die 4 Binäreingänge können bis zu 4 Taster abgefragt werden, wobei jeder Tasterkanal einem beliebigen Binäreingang zugeordnet werden kann.
+
+### OpenKNX UP1 Präsenzmelder+ (UP1-PM-HF)
+
+#### Sensoren 
+
+Hier können Einstellungen vorgenommen werden, wenn ein I²C-Sensor am Anschluss J30 angeschlossen wurde oder ein Lichtsensor (VEML7700) oder ein Entfernungssensor (TOF400) verbaut wurde.
+
+#### Präsenzmelder
+
+Hier können Einstellungen vorgenommen werden, wenn ein Präsenzsensor (HLK2420) oder ein Lichtsensor (VEML7700) verbaut wurde.
+
+#### Binäreingänge
+
+#### Status LED
+
+Hier ist nur eine LED einzustellen als Präsenz+Bewegungs-LED. Es ist eine RGB-LED verbaut, die auch extern über KO angesteuert werden kann.
+
+### OpenKNX UP1 Taster (UP1-TAS-4x)
+
+Dieser Taster kann über eine Erweiterung auch als 8-Fach-Taster (4 Wippen) betrieben werden. 
+
+#### Binäreingänge
+
+Die Binäreingägne sind folgendermaßen Vorbelegt:
+
+* BI A: Taste links oben
+* BI B: Taste links unten
+* BI C: Taste rechts oben
+* BI D: Taste rechts unten
+* BI E: Taste links oben (Erweiterung)
+* BI F: Taste links unten (Erweiterung)
+* BI G: Taste rechts oben (Erweiterung)
+* BI H: Taste rechts unten (Erweiterung)
+* BI I: Anschluss I0
+* BI J: Anschluss I1
+
+#### Virtuelle Taster
+
+Die Tasten können natürlich frei belegt werden. Üblicherweise verwendet man aber 2 oder - mit Erweiterung 4 Wippen. Dabei nutzt
+
+* Wippe links: Binäreingang A und B
+* Wippe rechts: Binäreingang C und D
+* Wippe links (Erweiterung): Binäreingang E und F
+* Wippe rechts (Erweiterung): Binäreingang G und H
+
+#### Status LED
+
+Hier ist nur eine LED einzustellen als Präsenz+Bewegungs-LED. Es ist eine RGB-LED verbaut, die auch extern über KO angesteuert werden kann.
+
+#### Sensoren 
+
+Hier können Einstellungen vorgenommen werden, wenn ein I²C-Sensor angeschlossen wurde, üblicherweise ist das ein SHT3x, der Temperatur und Luftfeuchte messen kann.
+
+
+### Smart-MF 1TE REG (SMARTMF-1Wire-1CH)
+
+wird nachgereicht
+
+### Smart-MF Sensormodul V4 (SMARTMF-SEN-V4)
+
+wird nachgereicht
+
+### Smart-MF RealPresence 2.0 (SMARTMF-RP-V2)
+
+wird nachgereicht
+
+### Alle Presenzmelder von ABSmartHouse
+
+#### Binäreingänge
+
+Die Binäreingägne sind folgendermaßen Vorbelegt:
+
+ * BI A: Anschluss A
+ * BI B: Anschluss B
+
+#### Status LED
+
+Man kann 2 LED einstellen, die grüne LED ist LED 1 und wird für die Anzeige von Präsenz genutzt, die gelbe LED ist LED 2 und zeigt Bewegung an.
+
+#### Sensoren 
+
+Hier können Einstellungen vorgenommen werden, wenn I²C-Sensoren angeschlossen wurden. 
+
+Der Multisensor ist für einen BME680 oder BME280, einen SCD40 oder SCD41 und einen VEML7700 vorbereitet.
+Die Wandsensoren können mit einem BME680 und einen VEML7700 bestückt werden.
+Der MR16-Sensor unterstützt nur einen VEML7700.
+
+#### Präsenzmelder
+
+Hier können Einstellungen vorgenommen werden, wenn ein Präsenzsensor (HLK2420) oder ein Lichtsensor (VEML7700) verbaut wurde.
 
 ## **Update vom Sensormodul 4.x**
 

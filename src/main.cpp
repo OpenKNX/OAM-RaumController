@@ -1,4 +1,7 @@
 #include "Logic.h"
+// #include "LogicRGBOutput.h"
+#include "SmartMF.h"
+#include "Feedback.h"
 #include "MeterModule.h"
 #include "OpenKNX.h"
 #ifdef WIREMODULE
@@ -16,6 +19,7 @@
 #include "ShutterControllerModule.h"
 #include "FunctionBlocksModule.h"
 #include "FileTransferModule.h"
+#include "StatusLEDModule.h"
 
 #ifdef ARDUINO_ARCH_RP2040
     #include "UsbExchangeModule.h"
@@ -44,6 +48,11 @@
     #include "VirtualButtonModule.h"
 #endif
 
+#ifdef DEVICE_AB_BUT_GIR
+    #include "HardwareModule.h"
+    HardwareModule gHardwareModule;
+#endif
+
 void setup()
 {
 #ifdef ARDUINO_ARCH_RP2040
@@ -53,11 +62,25 @@ void setup()
     #endif
 #endif
 
-#ifdef DEVICE_UP1_PM_HF
-    pinMode(26, INPUT_PULLUP);
-#endif
-
     openknx.init();
+
+    if (!knx.configured())
+    {
+#ifdef DEVICE_UP1_PM_HF
+        OpenKNX::Led::Base *lUnconfiguredLed = openknx.leds.getLed(OpenKNX::Led::LED_TYPE_USER);
+        openknx.ledFunctions.assignLed2Function(lUnconfiguredLed, OPENKNX_LEDFUNC_BASE_STATE );
+        lUnconfiguredLed->brightness(10);
+#endif
+#ifdef DEVICE_AB_PRE_BASE
+        OpenKNX::Led::Base *lUnconfiguredLed = openknx.leds.getLed(OpenKNX::Led::LED_TYPE_USER+1);
+        openknx.ledFunctions.assignLed2Function(lUnconfiguredLed, OPENKNX_LEDFUNC_BASE_STATE );
+#endif
+#ifdef DEVICE_UP1_TAS_4X
+        OpenKNX::Led::Base *lUnconfiguredLed = openknx.leds.getLed(OpenKNX::Led::LED_TYPE_USER);
+        openknx.ledFunctions.assignLed2Function(lUnconfiguredLed, OPENKNX_LEDFUNC_BASE_STATE ); 
+#endif
+    }
+    
     openknx.addModule(1, openknxLogic);
 #ifdef WIREMODULE
     openknx.addModule(2, openknxWireGateway);
@@ -106,7 +129,19 @@ openknx.addModule(5, openknxFileTransferModule);
 #ifdef ARDUINO_ARCH_RP2040
     openknx.addModule(15, openknxUsbExchangeModule);
 #endif
-    openknx.setup();
+    openknx.addModule(16, smartmf);
+#if defined(OPENKNX_BUZZER_PIN) || defined(OPENKNX_VIBRATION_PIN)
+    openknx.addModule(17, openknxFeedback);
+#else
+    openknx.unsupportedEtsModule(ETS_ModuleId_BUZZ);
+#endif
+    openknx.addModule(18, openknxStatusLEDModule);
+
+#ifdef DEVICE_AB_BUT_GIR
+    openknx.addModule(19, gHardwareModule);
+#endif
+
+openknx.setup();
 }
 
 void loop()

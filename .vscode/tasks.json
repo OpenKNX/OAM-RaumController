@@ -110,7 +110,7 @@
             "group": "test"
         },
         {
-            "label": "OpenKNXproducer",
+            "label": "OpenKNXproducer-Dev",
             "type": "shell",
             "command": "~/bin/OpenKNXproducer.exe",
             "args": [
@@ -118,6 +118,19 @@
                 "--Debug",
                 "--HeaderFileName=include/knxprod.h",
                 "src/RaumController"
+            ],
+            "problemMatcher": [],
+            "group": "test"
+        },
+        {
+            "label": "OpenKNXproducer-Release",
+            "type": "shell",
+            "command": "~/bin/OpenKNXproducer.exe",
+            "args": [
+                "create",
+                "--Debug",
+                "--HeaderFileName=include/knxprod.h",
+                "src/RaumController-Release"
             ],
             "problemMatcher": [],
             "group": "test"

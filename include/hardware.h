@@ -5,8 +5,14 @@
     #include <HardwareConfig.h>
     
     #ifdef DEVICE_REG1_BASE
-    #define I2C_SDA_PIN OKNXHW_REG1_SENSOR_SDA_TX_PIN
+        #define I2C_SDA_PIN OKNXHW_REG1_SENSOR_SDA_TX_PIN
         #define I2C_SCL_PIN OKNXHW_REG1_SENSOR_SCL_RX_PIN
+        // the following has side effects with common button handling
+        // #define FUNC2_BUTTON_PIN REG1_FRONT_PIN4
+        // #define FUNC3_BUTTON_PIN REG1_FRONT_PIN7
+        #define OPENKNX_BI_GPIO_PINS REG1_FRONT_PIN3, REG1_FRONT_PIN4, REG1_FRONT_PIN7
+        #define OPENKNX_BI_GPIO_COUNT 3
+        #define OPENKNX_BI_ONLEVEL LOW
     #endif
 
     #ifdef DEVICE_REG1_BASE_V0
@@ -15,7 +21,7 @@
     #endif
         
     // UP1 als 1-Kanal-Sensormodul
-    #ifdef DEVICE_SEN_UP1_8XTH
+    #ifdef DEVICE_UP1_SEN_8X
         #define I2C_SDA_PIN OKNXHW_SENSOR_E2_SDA_PIN // Channel E on SEN-UP1-8xTH
         #define I2C_SCL_PIN OKNXHW_SENSOR_E1_SCL_PIN // Channel E on SEN-UP1-8xTH
 
@@ -23,6 +29,15 @@
         #define OPENKNX_BI_GPIO_COUNT 4
         #define OPENKNX_BI_ONLEVEL LOW
     #endif
+
+    // Taster als RaumController
+    #ifdef DEVICE_UP1_TAS_4X
+        #undef OPENKNX_BI_GPIO_PINS
+        #undef OPENKNX_BI_GPIO_COUNT
+        #define OPENKNX_BI_GPIO_PINS TASTE1_PIN, TASTE2_PIN, TASTE3_PIN, TASTE4_PIN, TASTE1_EXT_PIN, TASTE2_EXT_PIN, TASTE3_EXT_PIN, TASTE4_EXT_PIN, 9, 8
+        #define OPENKNX_BI_GPIO_COUNT 10
+    #endif
+
 
     // // Board specific definitions
     // // #define BOARD_MASIFI
