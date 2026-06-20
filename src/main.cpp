@@ -48,6 +48,11 @@
     #include "VirtualButtonModule.h"
 #endif
 
+#ifdef DEVICE_AB_BUT_GIR
+    #include "HardwareModule.h"
+    HardwareModule gHardwareModule;
+#endif
+
 void setup()
 {
 #ifdef ARDUINO_ARCH_RP2040
@@ -131,6 +136,10 @@ openknx.addModule(5, openknxFileTransferModule);
     openknx.unsupportedEtsModule(ETS_ModuleId_BUZZ);
 #endif
     openknx.addModule(18, openknxStatusLEDModule);
+
+#ifdef DEVICE_AB_BUT_GIR
+    openknx.addModule(19, gHardwareModule);
+#endif
 
 openknx.setup();
 }

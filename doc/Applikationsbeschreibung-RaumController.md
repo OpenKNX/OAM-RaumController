@@ -17,6 +17,27 @@ Alles ohne zentralen Server.
 ## **Änderungshistorie**
 
 Im folgenden werden Änderungen an der Applikation erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren. Dabei wird primär auf Änderungen in den beteiligten Modulen hingewiesen. Detailänderungen können dann in den jeweiligen Applikationsbeschreibungen nachgelesen werden.
+
+20.06.2026: Firmware 5.5.0, Application 5.5:
+
+Hier werden nur wesentliche Neuerungen aufgelistet: Die jeweiligen Detail-Änderungen der Module kann man jeweils in deren Applikationen nachlesen.
+
+- NEU: Beim Logikmodul können jetzt einzelne Kanäle gesperrt werden.
+- NEU: Beim Präsenzmelder kann der PIR-Sensor alleine verwendet werden, ohne HF-Sensor.
+- NEU: Bei der Jalousiesteuerung kann man jetzt Fassaden auswählen.
+- NEU: Als Hardware wird jetzt auch der Taster für Gira Wippen unterstützt.
+
+Folgende Module wurden aktualisiert:
+
+- Netzwerk auf Version 0.6
+- Präsenzmelder auf Version 3.10
+- Jalousiesteuerung auf Version 0.8
+- Buzzer/Vibration auf Version 0.3
+- Zähler auf Version 0.6
+- Logiken auf Version 4.3
+
+Die jeweiligen Detail-Änderungen der Module kann man jeweils in deren Applikationen bzw. den zugehörigen Changelogs nachlesen.
+
 26.03.2026: Firmware 5.4.0, Application 5.4:
 
 - NEU: Status LEDs in der Version 0.2 zugefügt

@@ -7,10 +7,12 @@
   
   <op:config href="RaumController.conf.xml" />
   
+  <op:nowarn id="1" regex="ROOM_ApplicationVersion_Dev" />
+
   <op:ETS OpenKnxId="0xA0"
     ApplicationNumber="0x12"
     ApplicationVersion="%ROOM_ApplicationVersion%"
-    ReplacesVersions="%ROOM_ReplacesVersions%"
+    ReplacesVersionsDownTo="4.0"
     ApplicationRevision="0"
     ProductName="RaumController"
     OrderNumber="OpenKnxRaumController"
