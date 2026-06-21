@@ -20,12 +20,12 @@ Im folgenden werden Änderungen an der Applikation erfasst, damit man nicht imme
 
 20.06.2026: Firmware 5.5.0, Application 5.5:
 
-Hier werden nur wesentliche Neuerungen aufgelistet: Die jeweiligen Detail-Änderungen der Module kann man jeweils in deren Applikationen nachlesen.
+Hier werden nur wesentliche Neuerungen aufgelistet:
 
 - NEU: Beim Logikmodul können jetzt einzelne Kanäle gesperrt werden.
 - NEU: Beim Präsenzmelder kann der PIR-Sensor alleine verwendet werden, ohne HF-Sensor.
 - NEU: Bei der Jalousiesteuerung kann man jetzt Fassaden auswählen.
-- NEU: Als Hardware wird jetzt auch der Taster für Gira Wippen unterstützt.
+- NEU: Als Hardware wird jetzt auch der Taster für Gira-Wippen von AB-SmartHouse unterstützt.
 
 Folgende Module wurden aktualisiert:
 
