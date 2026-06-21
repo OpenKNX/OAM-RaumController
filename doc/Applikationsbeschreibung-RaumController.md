@@ -18,7 +18,7 @@ Alles ohne zentralen Server.
 
 Im folgenden werden Änderungen an der Applikation erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren. Dabei wird primär auf Änderungen in den beteiligten Modulen hingewiesen. Detailänderungen können dann in den jeweiligen Applikationsbeschreibungen nachgelesen werden.
 
-20.06.2026: Firmware 5.5.0, Application 5.5:
+20.06.2026: Firmware 5.5.1, Application 5.5:
 
 Hier werden nur wesentliche Neuerungen aufgelistet:
 
@@ -26,6 +26,7 @@ Hier werden nur wesentliche Neuerungen aufgelistet:
 - NEU: Beim Präsenzmelder kann der PIR-Sensor alleine verwendet werden, ohne HF-Sensor.
 - NEU: Bei der Jalousiesteuerung kann man jetzt Fassaden auswählen.
 - NEU: Als Hardware wird jetzt auch der Taster für Gira-Wippen von AB-SmartHouse unterstützt.
+- NEU: Senderatenbegrenzung beim Sensormodul verhindert ungewollte Telegrammflut
 
 Folgende Module wurden aktualisiert:
 
@@ -35,6 +36,7 @@ Folgende Module wurden aktualisiert:
 - Buzzer/Vibration auf Version 0.3
 - Zähler auf Version 0.6
 - Logiken auf Version 4.3
+- Sensoren auf Version 4.11 
 
 Die jeweiligen Detail-Änderungen der Module kann man jeweils in deren Applikationen bzw. den zugehörigen Changelogs nachlesen.
 
