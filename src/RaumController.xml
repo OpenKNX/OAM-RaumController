@@ -13,6 +13,7 @@
     ApplicationNumber="0x11"
     ApplicationVersion="%ROOM_ApplicationVersion_Dev%"
     ReplacesVersionsDownTo="0.3"
+    ApplicationRevision="0"
     ProductName="RaumController"
     BuildSuffix="-Dev"
     BuildSuffixText=" (Dev)"
