@@ -53,11 +53,6 @@ if ($releaseIndication -eq "Beta") {
     # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild  release_DEVICE_REG1_BASE firmware-OpenKNX-REG1-BASE rp2040-tp
     # if (!$?) { exit 1 }
     
-    # # build firmware for AB-BUT-GIR
-    # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 -DebugBuild  release_AB_BUT_GIR_ABSmartHouse firmware-AB-SmartHouse-BUT-GIR rp2040-tp
-    # if (!$?) { exit 1 }
-    
-
     # # build firmware for UP1_SEN_8X
     # lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_DEVICE_UP1_SEN_8X firmware-OpenKNX-UP1-SEN-8x rp2040-tp
     # if (!$?) { exit 1 }
@@ -192,7 +187,7 @@ if ($releaseIndication -eq "Release-Beta") {
     if (!$?) { exit 1 }
 
     # build firmware for AB-BUT-GIR
-    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_AB_BUT_GIR_ABSmartHouse firmware-AB-SmartHouse-BUT-GIR rp2040-tp
+    lib/OGM-Common/scripts/setup/reusable/Build-Step.ps1 release_AB_BUT_GIR_ABSmartHouse firmware-AB-SmartHouse-PushButtonsForGira rp2040-tp
     if (!$?) { exit 1 }
     
 }
