@@ -68,6 +68,9 @@
 		},
 		{
 			"path": "../OGM-SensorDevices"
+		},
+		{
+			"path": "../TPUart"
 		}
 	],
 	"settings": {
