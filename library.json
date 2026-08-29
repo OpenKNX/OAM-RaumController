@@ -1,6 +1,6 @@
 ﻿{
     "name": "OAM-RaumController",
-    "version": "5.5.1",
+    "version": "5.6.0",
     "description": "RoomController module for the knx stack, can be parametrized with ETS",
     "homepage": "https://openknx.de",
     "authors": {

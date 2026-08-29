@@ -39,6 +39,17 @@
             ModuleType="11">
     <op:verify File="../lib/OFM-Network/library.json" ModuleVersion="%NET_VerifyVersion%" /> 
   </op:define>
+
+  <!-- FTC access-control config (FTM_Security stage + FTM_Password + auto-logout). Pulled because this
+       product builds with the FTC device profile; the share carries 0 ComObjects, so the KO layout is
+       unchanged. ModuleType 13 was free here. Dynamic + Baggages arrive via the generic op:includetemplate
+       Dynamic is injected into the BASE 'Erweitert' block in the <generate> section below. -->
+  <op:define prefix="FTM"
+             share="../lib/OFM-FileTransferModule/src/FileTransfer.share.xml"
+             noConfigTransfer="true"
+             ModuleType="13">
+    <op:verify File="../lib/OFM-FileTransferModule/library.json" ModuleVersion="%FTM_VerifyVersion%" />
+  </op:define>
  
   <op:define prefix="UCT"
     share="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml"
@@ -223,5 +234,39 @@
     <op:verify File="../lib/OFM-FunctionBlocks/library.json" ModuleVersion="%FCB_VerifyVersion%" />
   </op:define>
 
-  <generate />
+  <generate>
+          <Dynamic>
+            <!-- BASE "OpenKNX" channel rebuilt in place (position preserved) so composed modules can be
+                 injected below Common's own "Erweitert" content. Convention: a module whose share ships a
+                 ParameterBlock Name="ExtendedInject" is folded in via the op:include below, so the section
+                 appears iff that module is op:define'd (auto-conditional, pure XML). Mirrors OAM-NeoPixel
+                 and OAM-IP-Interface. OpenKNXproducerGeneratedModules is kept: this product registers
+                 ConfigTransfer (UCT), so the producer post-process completes that block.
+                 Rebuilding the channel replaces the producer's default per-define loop, so every module's
+                 Dynamic is listed explicitly below, in op:define order. A new op:define needs a line here. -->
+            <Channel Id="%AID%_CH-BASE" Number="BASE" Name="BASE_Main" Text="OpenKNX" Icon="openknx" HelpContext="BASE-OpenKNX">
+              <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Dynamic/Channel/ParameterBlock[@Name='Basic']" prefix="BASE" />
+              <ParameterBlock Id="%AID%_PB-nnn" Name="Extended" Text="Erweitert" Icon="format-list-text" HelpContext="BASE-OpenKNX">
+                <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Dynamic/Channel/ParameterBlock[@Name='Extended']/*" IsInner="true" prefix="BASE" />
+                <op:include href="../lib/OFM-FileTransferModule/src/FileTransfer.share.xml" xpath="//Dynamic/Channel/ParameterBlock/*" IsInner="true" prefix="FTM" />
+              </ParameterBlock>
+              <op:include href="../lib/OGM-Common/src/Common.share.xml" xpath="//ApplicationProgram/Dynamic/Channel/*[not(self::ParameterBlock[@Name='Basic']) and not(self::ParameterBlock[@Name='Extended'])]" prefix="BASE" />
+            </Channel>
+            <op:include href="../lib/OFM-Network/src/Network.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="NET" />
+            <op:include href="../../OFM-ConfigTransfer/src/ConfigTransfer.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="UCT" />
+            <op:include href="../lib/OFM-SensorModule/src/Sensormodul.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="SENS" />
+            <op:include href="../lib/OFM-OneWireModule/src/WireGateway.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="WIRE" />
+            <op:include href="../lib/OFM-PresenceModule/src/PMmodul.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="PM" />
+            <op:include href="../lib/OFM-ShutterControllerModule/src/ShutterControllerModule.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="SHC" />
+            <op:include href="../lib/OFM-VirtualButton/src/VirtualButton.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="BTN" />
+            <op:include href="../lib/OFM-BinaryInput/src/BinaryInputChannel.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="BI" />
+            <op:include href="../lib/OFM-ADCInput/src/ADCInputChannel.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="ADC" />
+            <op:include href="../lib/OFM-Feedback/src/Feedback.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="BUZZ" />
+            <op:include href="../lib/OFM-StatusLED/src/StatusLED.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="SLED" />
+            <op:include href="../lib/OFM-Meter/src/MeterModule.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="MTR" />
+            <op:include href="../lib/OFM-DFA/src/DfaModule.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="DFA" />
+            <op:include href="../lib/OFM-LogicModule/src/Logikmodul.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="LOG" />
+            <op:include href="../lib/OFM-FunctionBlocks/src/FunctionBlocks.share.xml" xpath="//ApplicationProgram/Dynamic/*" prefix="FCB" />
+          </Dynamic>
+</generate>
 </KNX>

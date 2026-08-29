@@ -9,4 +9,14 @@ It uses some Modules from the OpenKNX project to implement a device, which can a
 
 For more information look into our [OpenKNX-wiki](https://github.com/OpenKNX/OpenKNX/wiki).
 
+Reference for other OAMs
+---
+
+This project doubles as the worked example for enabling the FTC file-transfer client (remote console and
+delta firmware update over the KNX bus) in an OAM: which build switches, how the ETS parameters are
+injected into the Common "Erweitert" page, which module branches are required, and what the release chain
+does and does not build.
+
+See [doc/FTC-Integration.md](doc/FTC-Integration.md).
+
 Thanks to all, who made this project successful.

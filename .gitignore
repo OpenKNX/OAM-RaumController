@@ -11,6 +11,7 @@ release/*
 release-package/*
 include/knxprod.h
 include/versions.h
+include/buildtime.h
 **/*.jdebug.user
 src/*.baggages/*
 release-collection/*
