@@ -82,20 +82,23 @@ verschwindet dessen ETS-Seite kommentarlos. Ein später hinzugefügtes `op:defin
 
 ApplicationVersion anheben (neue Parameter, geändertes Speicherlayout).
 
-## 5. ftc-Client bauen lassen — `scripts/Build-Release.ps1`, vor dem Preprocess
+## 5. oknx bauen lassen — `scripts/Build-Release.ps1`, vor dem Preprocess
 
 ```powershell
-$ftcCliDir = "lib/OFM-FileTransferModule/ftc-cli"
+$oknxDir = "lib/OFM-FileTransferModule/oknx"
 if ($env:OPENKNX_SKIP_HOSTCLI -ne "1") {
-    if (Test-Path (Join-Path $ftcCliDir "platformio.ini")) {
-        pio run -d $ftcCliDir
-        if (!$?) { Write-Host "ftc-cli build failed" -ForegroundColor Red; exit 1 }
+    if (Test-Path (Join-Path $oknxDir "platformio.ini")) {
+        pio run -d $oknxDir
+        if (!$?) { Write-Host "oknx build failed" -ForegroundColor Red; exit 1 }
+    } else {
+        Write-Host "oknx project not found ($oknxDir)" -ForegroundColor Red
+        exit 1
     }
 }
 ```
 
-⚠ Der Release-Hook von FTM **kopiert** nur, er baut nicht. Ohne diesen Block enthält das Release keinen
-Client — ohne Fehlermeldung.
+⚠ Der Release-Hook von FTM **kopiert** nur, er baut nicht. Ohne diesen Block enthält das Release kein
+Werkzeug — ohne Fehlermeldung. Der `else`-Zweig bricht deshalb ab, statt still zu überspringen.
 
 `pio run` cross-baut **6 der 8 Ziele von jedem Host aus** (Linux x64/arm64/armhf, Windows x86/x64/arm64):
 dafür zieht sich der Pre-Build-Hook ein projektlokales `zig` selbst nach. Nur die beiden macOS-Ziele
@@ -121,7 +124,7 @@ unzip -qo src/<Produkt>.knxprod -d /tmp/kp
 grep -o 'Text="Datei-Transfer"' /tmp/kp/M-*/M-*_A-*.xml  # muss LEER sein
 strings .pio/build/<env>/firmware.elf | grep -c "NCN Rails"   # > 0
 
-ftc -i <Router-IP> <PA> info                             # Funktionen: ... Console ... Delta
+oknx -i <Router-IP> <PA> info                            # Funktionen: ... Console ... Delta
 ```
 
 Richtig ist: kein „Datei-Transfer"-Kanal, und „Zugriffsschutz Service & Wartung" als letzter Separator

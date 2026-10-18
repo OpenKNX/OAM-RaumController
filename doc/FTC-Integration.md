@@ -48,7 +48,7 @@ Diese Seite ist das durchgerechnete Beispiel, kein Ersatz dafür.
   - [So sieht das Ergebnis in der ETS aus](#so-sieht-das-ergebnis-in-der-ets-aus)
   - [`src/LocalApplication.xml` ist nicht die Basisvorlage](#srclocalapplicationxml-ist-nicht-die-basisvorlage)
   - [Die Template-Variante — hier bewusst nicht benutzt](#die-template-variante--hier-bewusst-nicht-benutzt)
-- [2c. Der ftc-Client im Release — bauen und kopieren sind zwei Schritte](#2c-der-ftc-client-im-release--bauen-und-kopieren-sind-zwei-schritte)
+- [2c. oknx im Release — bauen und kopieren sind zwei Schritte](#2c-oknx-im-release--bauen-und-kopieren-sind-zwei-schritte)
   - [Der Mechanismus](#der-mechanismus)
   - [Woher der Hook die Binaries nimmt — in dieser Reihenfolge](#woher-der-hook-die-binaries-nimmt--in-dieser-reihenfolge)
   - [Der Bau gehört ins `Build-Release.ps1` des OAM](#der-bau-gehört-ins-build-releaseps1-des-oam)
@@ -335,11 +335,11 @@ in eine Datei.
 **Hier wird bewusst die Inline-Form verwendet**, um nah an OAM-NeoPixel zu bleiben. Wer ein neues OAM
 aufsetzt und die Wahl hat, kann genauso gut `base=` nehmen; das Ergebnis im `.knxprod` ist dasselbe.
 
-## 2c. Der ftc-Client im Release — bauen und kopieren sind zwei Schritte
+## 2c. oknx im Release — bauen und kopieren sind zwei Schritte
 
-Der Release-Hook von FTM **kopiert** den PC-Client `ftc` ins Release, er **baut** ihn nicht. Gebaut wird er
-vom `Build-Release.ps1` des OAM. Wer FTM neu einbindet und diesen Block vergisst, bekommt ein Release ohne
-Client — ohne dass etwas fehlschlägt.
+Der Release-Hook von FTM **kopiert** das PC-Werkzeug `oknx` ins Release, er **baut** es nicht. Gebaut wird
+es vom `Build-Release.ps1` des OAM. Wer FTM neu einbindet und diesen Block vergisst, bekommt ein Release
+ohne Werkzeug — ohne dass etwas fehlschlägt.
 
 ### Der Mechanismus
 
@@ -353,45 +353,49 @@ vor dem Firmware-Build ausführt.
 FTMs Hook legt an:
 
 ```
-release/Tools/ftc-cli/README.md
-release/Tools/ftc-cli/Windows/{x64,x86,arm64}/ftc.exe
-release/Tools/ftc-cli/Linux/{x64,arm64,armhf}/ftc
-release/Tools/ftc-cli/MacOS/{x64,arm64}/ftc
+release/Tools/oknx/README.md
+release/Tools/oknx/Windows/{x64,x86,arm64}/oknx.exe
+release/Tools/oknx/Linux/{x64,arm64,armhf}/oknx
+release/Tools/oknx/MacOS/{x64,arm64}/oknx
 ```
 
-OS und Architektur liest er aus den Env-Namen der Build-Matrix (`ftc-cli-<os>-<arch>`), ein neues Ziel
+OS und Architektur liest er aus den Env-Namen der Build-Matrix (`oknx-<os>-<arch>`), ein neues Ziel
 braucht im Hook also keine Änderung.
 
 ### Woher der Hook die Binaries nimmt — in dieser Reihenfolge
 
 | Quelle | vorhanden? |
 |---|---|
-| 1. `OFM-FileTransferModule/ftc-cli/.pio/build/ftc-cli-<os>-<arch>/ftc[.exe]` | nur nach lokalem Matrix-Build |
-| 2. `OFM-FileTransferModule/ftc-cli/release/Tools/ftc-cli/` (vorbereiteter Baum) | **git-ignored**, in einem frischen Clone leer |
-| 3. nichts davon | `Tools/ftc-cli` entfällt ersatzlos |
+| 1. `OFM-FileTransferModule/oknx/.pio/build/oknx-<os>-<arch>/oknx[.exe]` | nur nach lokalem Matrix-Build |
+| 2. `OFM-FileTransferModule/oknx/release/Tools/oknx/` (vorbereiteter Baum) | **git-ignored**, in einem frischen Clone leer |
+| 3. nichts davon | `Tools/oknx` entfällt ersatzlos |
 
-Punkt 2 ist der, den man leicht falsch einschätzt: `ftc-cli/release/` fällt unter `[Rr]elease/` in FTMs
+Punkt 2 ist der, den man leicht falsch einschätzt: `oknx/release/` fällt unter `[Rr]elease/` in FTMs
 `.gitignore` — **null getrackte Dateien**. Nach `git clone` ist dort nichts. Ein OAM, das FTM frisch
-einbindet und nie `ftc-cli` gebaut hat, landet also direkt bei Punkt 3.
+einbindet und nie `oknx` gebaut hat, landet also direkt bei Punkt 3.
 
 ### Der Bau gehört ins `Build-Release.ps1` des OAM
 
 Genau hier liegt der Schritt, den man beim Einbinden vergisst — und genau so machen es OAM-IP-Interface
-und OAM-IP-Router. Der Block steht **vor** dem Preprocess, damit ein fehlgeschlagener Client-Bau abbricht,
-bevor die Firmware gebaut wird:
+und OAM-IP-Router. Der Block steht **vor** dem Preprocess, damit ein fehlgeschlagener Werkzeug-Bau
+abbricht, bevor die Firmware gebaut wird. Der `else`-Zweig bricht ebenfalls ab: ein fehlendes Projekt
+ergäbe sonst ein Release ohne Werkzeug mit Exit 0:
 
 ```powershell
-$ftcCliDir = "lib/OFM-FileTransferModule/ftc-cli"
+$oknxDir = "lib/OFM-FileTransferModule/oknx"
 if ($env:OPENKNX_SKIP_HOSTCLI -ne "1") {
-    if (Test-Path (Join-Path $ftcCliDir "platformio.ini")) {
-        Write-Host "Building the PC FileTransferClient matrix (pio run -> ftc, all OS/arch)..." -ForegroundColor Cyan
-        pio run -d $ftcCliDir
-        if (!$?) { Write-Host "ftc-cli build failed" -ForegroundColor Red; exit 1 }
+    if (Test-Path (Join-Path $oknxDir "platformio.ini")) {
+        Write-Host "Building the oknx PC tool matrix (pio run -> oknx, all OS/arch)..." -ForegroundColor Cyan
+        pio run -d $oknxDir
+        if (!$?) { Write-Host "oknx build failed" -ForegroundColor Red; exit 1 }
+    } else {
+        Write-Host "oknx project not found ($oknxDir)" -ForegroundColor Red
+        exit 1
     }
 }
 ```
 
-Ein `pio run` baut die **ganze** Matrix: die `platformio.ini` des ftc-cli definiert eine Env je Ziel, und
+Ein `pio run` baut die **ganze** Matrix: die `platformio.ini` von oknx definiert eine Env je Ziel, und
 ein Pre-Build-Hook zieht sich ein projektlokales `zig` für die Cross-Ziele selbst nach (`.tools/`,
 gitignored). Kein manuelles Toolchain-Setup, aber beim ersten Lauf Internet.
 
@@ -413,16 +417,16 @@ Die beiden macOS-Ziele sind die einzige Ausnahme (`die("target %s needs a macOS 
 `-isysroot` auf das Xcode-SDK und `-framework CoreFoundation` brauchen — das lässt sich nicht mitliefern.
 Auf Linux oder Windows baut man die Matrix also ohne diese zwei.
 
-Daraus folgt auch: **eine Änderung am ftc-Quelltext erreicht ein Release erst nach erneutem Matrix-Bau.**
+Daraus folgt auch: **eine Änderung am oknx-Quelltext erreicht ein Release erst nach erneutem Matrix-Bau.**
 Ein bestehendes `.pio/build` liefert sonst weiter die alten Binaries.
 
 ### Zwei Eigenschaften, die man kennen sollte
 
 - **Ein fehlschlagender Hook bricht das Release nicht ab**, er warnt nur. Absicht: das sind optionale
   Begleitartefakte mit eigenem Release-Zyklus, ein Firmware-Release darf daran nicht hängen.
-- **Findet er kein ftc**, entfällt `Tools/ftc-cli` und die Meldung lautet
-  `ftc not found -- no Tools/ftc-cli; KNX-Upload will use an installed ftc`. Das Release ist trotzdem
-  gültig — das Upload-Skript arbeitet dann mit einem selbst installierten ftc.
+- **Findet er kein oknx**, entfällt `Tools/oknx` und die Meldung lautet
+  `oknx not found -- no Tools/oknx; KNX-Upload will use an installed oknx`. Das Release ist trotzdem
+  gültig — das Upload-Skript arbeitet dann mit einem selbst installierten oknx.
 
 Ein Modul, das **nicht** unter `lib/` liegt, wird vom Glob nicht erfasst und trägt nichts bei — in diesem
 OAM betrifft das `OFM-ConfigTransfer`, das über `../../` eingebunden ist.
@@ -494,13 +498,13 @@ Die Kanalzahl geht 17 → 16: genau der „Datei-Transfer"-Reiter, sonst nichts.
 ### Am laufenden Gerät gegenprüfen
 
 Alles bisherige prüft nur den Build. Ob die Switches wirklich greifen, sagt erst das Gerät selbst — über
-den ftc-Client, der ohnehin im Release liegt (Abschnitt 2c):
+oknx, das ohnehin im Release liegt (Abschnitt 2c):
 
 ```sh
-ftc -i <Router-IP> <PA> info
+oknx -i <Router-IP> <PA> info
 ```
 
-![ftc info gegen den RaumController](FTC-ftc-info.png)
+![oknx info gegen den RaumController](FTC-ftc-info.png)
 
 Die entscheidende Zeile ist **`Funktionen`**. Sie ist die aufgelöste Antwort auf `CheckFeatures`, also das,
 was das Gerät selbst über sich behauptet — nicht das, was in der `platformio.custom.ini` steht:
@@ -610,7 +614,7 @@ build_flags = ${FTC_DELTA.build_flags}
 | Schreibzugriffe trotz Umbau ungeschützt | `SECURITY` ist übersetzt, aber die ETS-Stufe steht auf der Vorgabe „Immer erlaubt". Das ist ein Parameter, kein Build-Zustand — siehe [So sieht das Ergebnis in der ETS aus](#so-sieht-das-ergebnis-in-der-ets-aus) |
 | knxOTA-Report meldet Delta als `✘` | Möglicherweise deklariert die Env zu wenig Flash, statt einer Hardware-Grenze. `RP2040_EXCHANGE_*` gegen den echten Chip prüfen |
 | Dateien > 4 KB im LittleFS werden korrupt | 4MB/8MB ohne den OFM-UsbExchange-Branch aus Abschnitt 0 — `filesystem_size` ist dann nicht sektorausgerichtet |
-| Release enthält kein `Tools/ftc-cli`, ohne Fehlermeldung | Der ftc-cli-Block fehlt im `Build-Release.ps1` des OAM, oder `scripts/release/Post.ps1` liegt nicht im Clone. Siehe 2c und „Offen / geplant" |
+| Release enthält kein `Tools/oknx`, ohne Fehlermeldung | Der oknx-Block fehlt im `Build-Release.ps1` des OAM, oder `scripts/release/Post.ps1` liegt nicht im Clone. Siehe 2c und „Offen / geplant" |
 | `bcu` / `bcu stat` liefern keine Chip-Daten | Die TPUart-Schalter sind nicht gesetzt; die Diagnose ist wegkompiliert, ohne Meldung. Siehe Abschnitt 1 |
 
 ## Offen / geplant
@@ -640,7 +644,7 @@ Hook als ungetrackte lokale Datei zufällig existiert.
 
 Die Ausnahme muss **nach** der Ausschlussregel stehen, und sie muss das **Verzeichnis** wieder einschließen:
 git steigt in ausgeschlossene Verzeichnisse gar nicht erst ab, eine Ausnahme auf einzelne Dateien darin
-greift deshalb nicht. `ftc-cli/release/` bleibt weiter ignoriert, das ist Build-Ausgabe.
+greift deshalb nicht. `oknx/release/` bleibt weiter ignoriert, das ist Build-Ausgabe.
 
 ### Das mächtigere `Build-Release.ps1` nach OGM-Common
 
@@ -659,7 +663,7 @@ die Vorlage, die hier (und in den meisten OAMs) liegt:
 
 Die Vorlage in OGM-Common ist der Stand, den jedes neue OAM kopiert. Sie dort auf die weiter entwickelte
 Fassung zu heben, würde den Nutzen einmal für alle heben, statt ihn in zwei Produkten zu belassen —
-einschließlich des ftc-cli-Blocks aus Abschnitt 2c, der dann nicht mehr je OAM nachgetragen werden muss.
+einschließlich des oknx-Blocks aus Abschnitt 2c, der dann nicht mehr je OAM nachgetragen werden muss.
 
 **Geplant, nicht umgesetzt.** Als Beispiel/Template in OGM-Common ablegen, damit bestehende OAMs
 freiwillig nachziehen können, statt sie zu einem Umbau zu zwingen.
