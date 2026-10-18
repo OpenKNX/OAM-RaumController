@@ -25,25 +25,27 @@
 $settings = scripts/OpenKNX-Build-Settings.ps1 $args[0]
 $releaseIndication = $settings["appRelease"]
 
-# ---- PC FileTransferClient (ftc-cli / ftc) -- built FIRST -----------------------------------
+# ---- PC tool oknx -- built FIRST -------------------------------------------------------------
 # Build the whole PC-client OS/arch matrix (Windows x86/x64/arm64, macOS x64/arm64, Linux x64/arm64/armhf)
-# with a single `pio run`: the ftc-cli platformio.ini defines one env per target and a pre-build hook that
+# with a single `pio run`: the oknx platformio.ini defines one env per target and a pre-build hook that
 # pulls a project-local zig for the cross targets. Done up front so a client build failure aborts BEFORE the
 # firmware build. Skip with: $env:OPENKNX_SKIP_HOSTCLI = "1"
-# The release layout Tools/ftc-cli/<OS>/<arch>/ftc[.exe] is assembled by OGM-Common's
+# The release layout Tools/oknx/<OS>/<arch>/oknx[.exe] is assembled by OGM-Common's
 # Build-Release-Postprocess.ps1 via FTM's scripts/release/Post.ps1 -- nothing to copy here.
 # Note: the macOS targets need a macOS host; on Linux/Windows those two envs fail by design.
-$ftcCliDir = "lib/OFM-FileTransferModule/ftc-cli"
+$oknxDir = "lib/OFM-FileTransferModule/oknx"
 if ($env:OPENKNX_SKIP_HOSTCLI -ne "1") {
-    if (Test-Path (Join-Path $ftcCliDir "platformio.ini")) {
-        Write-Host "Building the PC FileTransferClient matrix (pio run -> ftc, all OS/arch)..." -ForegroundColor Cyan
-        pio run -d $ftcCliDir
-        if (!$?) { Write-Host "ftc-cli build failed" -ForegroundColor Red; exit 1 }
+    if (Test-Path (Join-Path $oknxDir "platformio.ini")) {
+        Write-Host "Building the oknx PC tool matrix (pio run -> oknx, all OS/arch)..." -ForegroundColor Cyan
+        pio run -d $oknxDir
+        if (!$?) { Write-Host "oknx build failed" -ForegroundColor Red; exit 1 }
     } else {
-        Write-Host "  - ftc-cli project not found ($ftcCliDir) -- skipping" -ForegroundColor DarkGray
+        Write-Host "oknx project not found ($oknxDir) -- the release would ship without the PC tool" -ForegroundColor Red
+        Write-Host "  check out the OFM-FileTransferModule submodule, or set OPENKNX_SKIP_HOSTCLI=1 to leave it out on purpose" -ForegroundColor Red
+        exit 1
     }
 } else {
-    Write-Host "Skipping PC client build (OPENKNX_SKIP_HOSTCLI)" -ForegroundColor Yellow
+    Write-Host "Skipping PC tool build (OPENKNX_SKIP_HOSTCLI)" -ForegroundColor Yellow
 }
 
 # execute generic pre-build steps
