@@ -1,6 +1,38 @@
 # Changes
 
 
+## v5.6.2: 2026-10-17
+
+Firmware **5.6.2**, ETS product **5.6** (`RaumController-Release.knxprod`, application version 0x56, same
+parameters and memory layout), dev product **3.7**. The generated application differs from 5.6.1 only in the
+version text of the Network module (0.8 -> 0.9) and its version in the configuration-transfer script, so a
+device on 5.6.1 needs the firmware alone, no ETS download.
+
+### Update
+* A device updated from 5.6.1 keeps address, application and group addresses: knx migrates the stored image to the new format and the device restarts once. The application is unloaded only when no single free block is as large as the growth of the metadata; a power cut during the in-place push or an image that does not fit leaves the device unconfigured. [doc/Firmware-Update-NVM.md](doc/Firmware-Update-NVM.md) describes the three ways the migration can take and the log line each one prints
+* Tested in the host tests of OAM-IP-Interface (TP device, mask 07B0); not yet tested on a RaumController, and not for the IP build `REG1_LAN_BASE` (mask 57B0)
+* From 5.5.x the application version changes as well: the address stays, the application waits for an ETS download
+* Going back to 5.6.1 needs the physical address and an ETS download again: its firmware does not read the new format
+
+### PC tool
+* Breaking: the PC tool `ftc` is now `oknx`, without an alias. Run `ftc uninstall` with the old binary before installing the new one; the release carries it under `Tools/oknx/<OS>/<arch>/`
+* The console command typed on the device stays `ftc`
+
+### Build
+* `Build-Release.ps1` builds oknx from `lib/OFM-FileTransferModule/oknx` and stops when that project is missing, instead of leaving the tool out of the release; `$env:OPENKNX_SKIP_HOSTCLI = "1"` leaves it out on purpose
+
+### Documentation
+* Feature: `doc/Firmware-Update-NVM.md` -- the stored image, the table layout read from a RaumController and a NeoPixel, the migration steps, the log lines and the behaviour on a power cut
+* Change: both FTC documents name oknx and its paths
+
+### Libraries
+Each library carries its own CHANGELOG with the full list.
+* knx: stored image migration with the in-place push; Application Program 2 on index 5; run state control (`PID_RUN_STATE_CONTROL`); serial number reads answered after the random wait; frames with an undefined control field ignored
+* OGM-Common: RP2040 watchdog fires 16 to 17 s after the last loop pass instead of after about 8.4 s; the time and date objects are encoded from an initialised time block, so an encode no longer fails on stray values and leaves the previous time in the object
+* OFM-Network (REG1 LAN Base only): KNX-IP is switched from the main loop only
+* OFM-FileTransferModule: the oknx rename, `setpa`, `unload` by object type, `ga ask`, and the scan reads every device by default
+
+
 ## v5.6.1: 2026-09-15
 
 Firmware **5.6.1**, ETS product **5.6** (`RaumController-Release.knxprod`), dev product **3.7**.
