@@ -19,6 +19,7 @@ does and does not build.
 
 Checklist to copy: [doc/FTC-Integration-TLDR.md](doc/FTC-Integration-TLDR.md)
 Full write-up with the measurements and the discarded approaches: [doc/FTC-Integration.md](doc/FTC-Integration.md)
+What happens to the stored programming on a firmware update with the current knx: [doc/Firmware-Update-NVM.md](doc/Firmware-Update-NVM.md)
 What changed per release: [CHANGELOG.md](CHANGELOG.md)
 
 Thanks to all, who made this project successful.
