@@ -18,6 +18,19 @@ Alles ohne zentralen Server.
 
 Im folgenden werden Änderungen an der Applikation erfasst, damit man nicht immer das Gesamtdokument lesen muss, um Neuerungen zu erfahren. Dabei wird primär auf Änderungen in den beteiligten Modulen hingewiesen. Detailänderungen können dann in den jeweiligen Applikationsbeschreibungen nachgelesen werden.
 
+25.10.2026: Firmware 5.6, Application 5.6:
+
+- NEU: Beim Logikmodul kann die Kanalsperre jetzt auch invertiert aktiv geschaltet werden.
+- NEU: Beim Sensormodul können jetzt auch die Sensoren SHT2x und SHT4x genutzt werden
+- NEU: Beim Sensormodul kann jetzt auch der BME688 genutzt werden.
+- NEU: Bei allen Sensoren mit Temp/Hum gibt es jetzt bei angabe eines Temperaturoffsets eine Temperaturkompensation der Luftfeuchte.
+- NEU: Fast alle Module wurden jetzt auf die neue [Kanalauswahl](https://github.com/OpenKNX/OGM-Common/blob/v1/src/Baggages/Help_de/BASE-ChannelSelect.md) umgestellt. **Unbedingt Update-Hinweise beachten!**
+
+Update-Hiweis:
+
+- Bedingt durch die neue Kanalauswahl werden **Suspendierte** Kanäle (bisherige Begriffe "deaktiviert zum testen" o.ä.) möglicherweise auf **deaktiviert** gesetzt, wodurch alle GA-Zuordnungen verloren gehen würden. Suspendierte Kanäle werden durch das Zeichen '&#x26D4;' markiert, bitte alle diese Kanäle **vor** dem Update auf 'aktiviert' stellen und nach dem Update wieder zurück stellen.
+
+
 20.06.2026: Firmware 5.5.1, Application 5.5:
 
 Hier werden nur wesentliche Neuerungen aufgelistet:

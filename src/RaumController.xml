@@ -4,7 +4,7 @@
 
 
   <op:config name="%WIRE_BusMasterCount%" value="1" />
-
+  
   <op:config href="RaumController.conf.xml" />
   
   <op:nowarn id="1" regex="ROOM_ApplicationVersion" />
@@ -63,7 +63,7 @@
   <op:define prefix="WIRE" 
              share="../lib/OFM-OneWireModule/src/WireGateway.share.xml"
              template="../lib/OFM-OneWireModule/src/WireGateway.templ.xml"
-             NumChannels="3" 
+             NumChannels="30" 
              KoSingleOffset="30" 
              KoOffset="90"  
              ModuleType="20" >
@@ -78,7 +78,7 @@
   <op:define prefix="PM"
     share="../lib/OFM-PresenceModule/src/PMmodul.share.xml"
     template="../lib/OFM-PresenceModule/src/PMmodul.templ.xml"
-    NumChannels="3"
+    NumChannels="16"
     KoOffset="120"
     ModuleType="30">
     <op:verify File="../lib/OFM-PresenceModule/library.json" ModuleVersion="%PM_VerifyVersion%" />
@@ -129,14 +129,14 @@
 
   <!-- 
   1 KO / Channel
-  => 4*1=4 KOs (max 10 reserved)
-  => [1330,1334[
+  => 4*4=16 KOs (max 20 reserved)
+  => [1360,1380[
   -->
   <op:define prefix="ADC"
     share="../lib/OFM-ADCInput/src/ADCInputChannel.share.xml"
     template="../lib/OFM-ADCInput/src/ADCInputChannel.templ.xml"
     NumChannels="4"
-    KoOffset="1330"
+    KoOffset="1360"
     ModuleType="25">
     <op:verify File="../lib/OFM-ADCInput/library.json" ModuleVersion="%ADC_VerifyVersion%" />
   </op:define>
@@ -176,7 +176,7 @@
   <op:define prefix="MTR"
     share="../lib/OFM-Meter/src/MeterModule.share.xml"
     template="../lib/OFM-Meter/src/MeterModule.templ.xml"
-    NumChannels="5" 
+    NumChannels="10" 
     KoOffset="730"
     ModuleType="22">
     <op:verify File="../lib/OFM-Meter/library.json" ModuleVersion="%MTR_VerifyVersion%" /> 
@@ -204,7 +204,7 @@
   <op:define prefix="LOG"
     share="../lib/OFM-LogicModule/src/Logikmodul.share.xml"
     template="../lib/OFM-LogicModule/src/Logikmodul.templ.xml"
-    NumChannels="20"
+    NumChannels="99"
     KoOffset="920"
     ModuleType="10">
     <op:verify File="../lib/OFM-LogicModule/library.json" ModuleVersion="%LOG_VerifyVersion%" />
@@ -218,7 +218,7 @@
   <op:define prefix="FCB"
     share="../lib/OFM-FunctionBlocks/src/FunctionBlocks.share.xml"
     template="../lib/OFM-FunctionBlocks/src/FunctionBlocks.templ.xml"
-    NumChannels="5"
+    NumChannels="10"
     KoOffset="1220"
     ModuleType="26">
     <op:verify File="../lib/OFM-FunctionBlocks/library.json" ModuleVersion="%FCB_VerifyVersion%" />
